@@ -2,7 +2,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "player.h"
-#include <QTimer>
+#include "enemy.h"
 
 
 Game::Game(QWidget*)
@@ -32,9 +32,9 @@ Game::Game(QWidget*)
     //set initial player position
     player->setPos(340, 270);
 
-    //spawn enemies every 2000 ms
-    QTimer* timer = new QTimer;
-    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
-    timer->start(2000);
-
+    //spawn enemies
+    Enemy* enemy1 = new Enemy;
+    Enemy* enemy2 = new Enemy;
+    scene->addItem(enemy1);
+    scene->addItem(enemy2);
 }

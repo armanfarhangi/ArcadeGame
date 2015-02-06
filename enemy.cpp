@@ -3,11 +3,10 @@
 #include <QGraphicsScene>
 
 Enemy::Enemy(){
-    //set random position along the top coordinate
-    int random_number = rand() % 700; //700 instead of 800 because enemies have 100 width
-    setPos(random_number, 0);
+    //set random position along the top platform edge
+    setPos((rand() % 557) + 100, 0);
 
-    //creates an enemy
+    //set image to the abstract enemy object
     setPixmap(QPixmap(":/Images/enemy.png"));
 
     //connects a timer with the move function to create a moving enemy
