@@ -1,4 +1,4 @@
-#include "beams.h"
+#include "player_beam.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>

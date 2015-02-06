@@ -1,6 +1,6 @@
 #include "player.h"
 #include <QKeyEvent>
-#include "beams.h"
+#include "player_beam.h"
 #include <QGraphicsScene>
 #include "stdlib.h"
 #include <QPixmap>
