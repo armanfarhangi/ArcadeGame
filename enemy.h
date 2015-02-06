@@ -12,6 +12,8 @@ public:
     Enemy();
 public slots:
     void move();
+private:
+    bool direction;
 };
 
 #endif // ENEMY

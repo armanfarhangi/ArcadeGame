@@ -4,7 +4,10 @@
 
 Enemy::Enemy(){
     //set random position along the top platform edge
-    setPos((rand() % 557) + 100, 0);
+    setPos((rand() % 557) + 100, -10);
+
+    //to determine what random direction enemy will start in (1 right, 0 left)
+    direction = rand() % 2;
 
     //set image to the abstract enemy object
     setPixmap(QPixmap(":/Images/enemy.png"));
@@ -17,13 +20,15 @@ Enemy::Enemy(){
 
 void Enemy::move()
 {
-    //if ()
-    //moves enemy down
-    setPos(x(), y() + 5);
-    //when bottom of enemy reaches the bottom coordinate, 600, it gets removed from scene and then deleted
-    if (y() > 600){
-        scene()->removeItem(this);
-        delete this;
-    }
+    //as long as enemy doesn't move past the right of top platform edge, then it moves right
+    if (direction == 1)
+        setPos(x() + 3, y());
+        if (x() > 595)
+            direction = 0;
+    //as long as enemy doesn't move past the left of top platform edge, then it moves left
+    if (direction == 0)
+        setPos(x() - 3, y());
+        if (x() < 120)
+            direction = 1;
 }
 
