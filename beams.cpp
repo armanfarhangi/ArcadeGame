@@ -34,8 +34,8 @@ void Beam::move_and_destroy()
 
     //moves bullet up
     setPos(x(), y() - 10);
-    //when bullet reaches the top y coordinate, 0, it gets removed from scene and then deleted
-    if (pos().y() < 0){
+    //when bullet reaches end of view, it gets removed and deleted
+    if (pos().y() < - 40){
         scene()->removeItem(this);
         delete this;
     }
