@@ -30,7 +30,7 @@ Game::Game(QWidget*)
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
 
     //set initial player position
-    player->setPos(340, 250);
+    player->setPos(340, 270);
 
     //spawn enemies every 2000 ms
     QTimer* timer = new QTimer;
