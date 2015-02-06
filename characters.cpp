@@ -37,9 +37,9 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPos(x(), y() + 10);
     }
     else if (event->key() == Qt::Key_Space){
-        //create beam and include it to Goku's scene
+        //create beam, center it on player, and include it to player's/game's scene
         Beam* beam = new Beam;
-        beam->setPos(x() + 30, y());
+        beam->setPos(x() + 40, y() - 40);
         scene()->addItem(beam);
     }
 }
