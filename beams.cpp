@@ -11,7 +11,7 @@ Beam::Beam(){
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(move_and_destroy()));
-    timer->start(45);
+    timer->start(40);
 }
 
 
@@ -30,7 +30,6 @@ void Beam::move_and_destroy()
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
         }
-
 
     //moves bullet up
     setPos(x(), y() - 10);
