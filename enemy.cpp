@@ -21,7 +21,7 @@ void Enemy::move()
     //moves enemy down
     setPos(x(), y() + 5);
     //when bottom of enemy reaches the bottom coordinate, 600, it gets removed from scene and then deleted
-    if (pos().y() > 600){
+    if (y() > 600){
         scene()->removeItem(this);
         delete this;
     }
