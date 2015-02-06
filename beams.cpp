@@ -11,7 +11,7 @@ Beam::Beam(){
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(move_and_destroy()));
-    timer->start(50);
+    timer->start(45);
 }
 
 

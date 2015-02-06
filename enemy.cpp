@@ -13,7 +13,7 @@ Enemy::Enemy(){
     //connects a timer with the move function to create a moving enemy
     QTimer* timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(45);
 }
 
 void Enemy::move()
