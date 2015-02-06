@@ -85,4 +85,6 @@ MainMenu::MainMenu(QWidget*)
 
     //Set organized elements to the menu window
     this->setLayout(vlay);
+
+
 }
