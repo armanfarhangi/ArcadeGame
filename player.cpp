@@ -44,5 +44,3 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 }
 
-/********************  ENEMY  ********************/
-
