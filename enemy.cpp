@@ -9,7 +9,7 @@ Enemy::Enemy(){
     //to determine what random direction enemy will start in (1 right, 0 left)
     direction = rand() % 2;
 
-    //to determine the speed of the enemy (2 - 4 pixel movements every 40 ms)
+    //to determine the speed of the enemy (2 - 5 pixel movements every 40 ms)
     speed = (rand() % 4) + 2;
 
     //set image to the abstract enemy object
