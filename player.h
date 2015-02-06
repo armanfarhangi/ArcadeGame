@@ -1,5 +1,5 @@
-#ifndef CHARACTERS
-#define CHARACTERS
+#ifndef PLAYER
+#define PLAYER
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
@@ -16,17 +16,5 @@ public slots:
     void spawn();
 };
 
-
-//inherited from QGraphicsRectItem so it has coordinates, length, and width
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
-class Enemy : public QObject, public QGraphicsPixmapItem {
-    Q_OBJECT
-public:
-    Enemy();
-public slots:
-    void move();
-};
-
-#endif // CHARACTERS
+#endif // PLAYER
 

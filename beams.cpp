@@ -2,7 +2,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
-#include "characters.h"
+#include "enemy.h"
 
 Beam::Beam(){
     //creates a beam

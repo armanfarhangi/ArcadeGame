@@ -4,7 +4,7 @@
 //grid-based game
 
 #include <QApplication>
-#include <characters.h>
+#include <player.h>
 #include <game.h>
 #include "mainmenu.h"
 #include <ctime>
