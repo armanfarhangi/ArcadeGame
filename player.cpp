@@ -3,7 +3,6 @@
 #include "beams.h"
 #include <QGraphicsScene>
 #include "stdlib.h"
-#include <QTimer>
 #include <QPixmap>
 #include "enemy.h"
 
@@ -43,13 +42,6 @@ void Player::keyPressEvent(QKeyEvent *event){
         beam->setPos(x() + 40, y() - 40);
         scene()->addItem(beam);
     }
-}
-
-void Player::spawn()
-{
-    //create an enemy
-    Enemy* enemy = new Enemy();
-    scene()->addItem(enemy);
 }
 
 /********************  ENEMY  ********************/
