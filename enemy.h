@@ -12,12 +12,15 @@ class Enemy : public QObject, public QGraphicsPixmapItem {
 public:
     Enemy(Player* player);
 public slots:
-    void move();
+    void set_coor();
+    void move_and_shoot();
+    void randomize();
 private:
     bool direction;
     int speed;
-    int player_x;
-    int player_y;
+    Player* target;
+    int target_x;
+    int target_y;
 };
 
 #endif // ENEMY

@@ -15,8 +15,8 @@ EnemyBeam::EnemyBeam()
 }
 
 void EnemyBeam::move_and_defeat(){
-    //moves beam down
-    setPos(x(), y() + 10);
+    //moves beam down (slower than player beams)
+    setPos(x(), y() + 6);
     //when bullet reaches end of view, it gets removed and deleted
     if (y() > 670){
         scene()->removeItem(this);
