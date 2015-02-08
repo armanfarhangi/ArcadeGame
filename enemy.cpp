@@ -1,8 +1,13 @@
 #include "enemy.h"
 #include <QTimer>
 #include <QGraphicsScene>
+#include "enemy_beam.h"
 
-Enemy::Enemy(){
+Enemy::Enemy(Player* player){
+    //store player's coordinates
+    player_x = player->x();
+    player_y = player->y();
+
     //set random position along the top platform edge
     setPos((rand() % 557) + 100, -10);
 
@@ -23,6 +28,13 @@ Enemy::Enemy(){
 
 void Enemy::move()
 {
+    //if enemy is on y-line with player, then they shoot down
+    if (x() == player_x){
+        EnemyBeam* beam = new EnemyBeam;
+        beam->setPos(x(), y());
+        scene()->addItem(beam);
+    }
+
     //as long as enemy doesn't move past the right of top platform edge, then it moves right
     if (direction == 1)
         setPos(x() + speed, y());
