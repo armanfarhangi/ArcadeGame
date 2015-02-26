@@ -1,3 +1,8 @@
+//Arman Farhangi
+//January 30, 2015
+// Kamehameha Attack!
+//grid-based game
+
 #include "enemy.h"
 #include <QTimer>
 #include <QGraphicsScene>
@@ -43,8 +48,8 @@ void Enemy::set_coor(){
 
 void Enemy::move_and_shoot()
 {
-    //if enemy is on-line with player (give or take 5 units), then they shoot down
-    if (abs(x()-target_x) <= 5){
+    //if enemy is on-line with player (give or take 8 units), then they shoot down
+    if (abs(x()-target_x) <= 8){
         EnemyBeam* beam = new EnemyBeam;
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);

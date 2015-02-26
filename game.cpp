@@ -1,3 +1,8 @@
+//Arman Farhangi
+//January 30, 2015
+// Kamehameha Attack!
+//grid-based game
+
 #include "game.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>

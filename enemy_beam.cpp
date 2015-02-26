@@ -1,3 +1,8 @@
+//Arman Farhangi
+//January 30, 2015
+// Kamehameha Attack!
+//grid-based game
+
 #include "enemy_beam.h"
 #include <QTimer>
 #include <QGraphicsScene>
