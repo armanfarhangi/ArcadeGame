@@ -12,12 +12,30 @@
 
 //inherited from QObject so it can connect
 //need to put in Q_OBJECT, a macro that allows for connecting signals and slots
-class Enemy : public QObject, public QGraphicsPixmapItem {
+class XEnemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    Enemy(Player* player, int y_coor);
+    XEnemy(Player* player, int y_coor);
     void move_and_shoot_down();
     void move_and_shoot_up();
+public slots:
+    void set_coor();
+    void randomize();
+    void move_and_shoot();
+private:
+    bool direction;
+    int speed;
+    Player* target;
+    int target_x;
+    int target_y;
+};
+
+class YEnemy : public QObject, public QGraphicsPixmapItem {
+    Q_OBJECT
+public:
+    YEnemy(Player* player, int x_coor);
+    void move_and_shoot_right();
+    void move_and_shoot_left();
 public slots:
     void set_coor();
     void randomize();

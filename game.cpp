@@ -135,14 +135,22 @@ void Game::start_battle()
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
 
     //spawn enemies
-    Enemy* top_enemy1 = new Enemy(player, -10);
-    Enemy* top_enemy2 = new Enemy(player, -10);
-    Enemy* bottom_enemy1 = new Enemy(player, 590);
-    Enemy* bottom_enemy2 = new Enemy(player, 590);
+    XEnemy* top_enemy1 = new XEnemy(player, -10);
+    XEnemy* top_enemy2 = new XEnemy(player, -10);
+    XEnemy* bottom_enemy1 = new XEnemy(player, 590);
+    XEnemy* bottom_enemy2 = new XEnemy(player, 590);
+    YEnemy* left_enemy1 = new YEnemy(player, 80);
+    YEnemy* left_enemy2 = new YEnemy(player, 80);
+    YEnemy* right_enemy1 = new YEnemy(player, 635);
+    YEnemy* right_enemy2 = new YEnemy(player, 635);
     scene->addItem(top_enemy1);
     scene->addItem(top_enemy2);
     scene->addItem(bottom_enemy1);
     scene->addItem(bottom_enemy2);
+    scene->addItem(left_enemy1);
+    scene->addItem(left_enemy2);
+    scene->addItem(right_enemy1);
+    scene->addItem(right_enemy2);
 
     view->show();
 }

@@ -26,7 +26,7 @@ void Beam::move_and_destroy()
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(Enemy)){ //if type of colliding_items[i] is Enemy
+        if (typeid(*(colliding_items[i])) == typeid(XEnemy)){ //if type of colliding_items[i] is Enemy
             scene()->removeItem(colliding_items[i]); //remove Enemy
             scene()->removeItem(this); //remove beam
             //memory management
