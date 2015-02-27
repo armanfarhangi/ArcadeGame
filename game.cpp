@@ -7,7 +7,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "player.h"
-#include "enemy.h"
+#include "enemies.h"
 
 
 Game::Game(QWidget*)

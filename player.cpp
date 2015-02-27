@@ -9,7 +9,7 @@
 #include <QGraphicsScene>
 #include "stdlib.h"
 #include <QPixmap>
-#include "enemy.h"
+#include "enemies.h"
 
 
 /********************  GOKU  ********************/

@@ -3,13 +3,14 @@
 // Kamehameha Attack!
 //grid-based game
 
-#include "enemy.h"
+#include "enemies.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include "enemy_beam.h"
 #include <cmath>
 
 Enemy::Enemy(Player* player){
+    //in order to
     target = player;
 
     //constantly store player's coordinates
@@ -17,7 +18,7 @@ Enemy::Enemy(Player* player){
     connect(coor_timer, SIGNAL(timeout()), this, SLOT(set_coor()));
     coor_timer->start(40);
 
-    //to make enemy movement less predictable; every 3 - 5 seconds, 50% chance of changing direction
+    //to make enemy movement less predictable; every 2 - 5 seconds, 50% chance of changing direction
     QTimer* timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(randomize()));
     timer->start((rand() % 3001) + 2000);
