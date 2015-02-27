@@ -11,7 +11,7 @@
 
 Beam::Beam(){
     //creates a beam
-    setPixmap(QPixmap(":/Images/up_beam.png"));
+    setPixmap(QPixmap(":/Images/up_down.png"));
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
@@ -37,9 +37,9 @@ void Beam::move_and_destroy()
         }
 
     //moves bullet up
-    setPos(x(), y() - 10);
+    setPos(x(), y() - 4);
     //when bullet reaches end of view, it gets removed and deleted
-    if (y() < - 40){
+    if (y() < -40){
         scene()->removeItem(this);
         delete this;
     }

@@ -11,7 +11,7 @@
 EnemyBeam::EnemyBeam(int direction)
 {
     //creates a beam
-    setPixmap(QPixmap(":/Images/up_beam.png"));
+    setPixmap(QPixmap(":/Images/enemy_up_down.png"));
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
