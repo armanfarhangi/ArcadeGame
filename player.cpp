@@ -36,10 +36,10 @@ Player::Player(int value)
         this->setPos(340, 270);
     }
 
-    //every three seconds, the player can shoot again
+    //every two seconds, the player can shoot again
     QTimer* timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(cooled_down()));
-    timer->start(3000);
+    timer->start(2000);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
