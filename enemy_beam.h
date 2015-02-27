@@ -15,9 +15,10 @@
 class EnemyBeam : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    EnemyBeam();
+    EnemyBeam(int direction);
 public slots:
-    void move_and_defeat();
+    void move_down();
+    void move_up();
 };
 
 #endif // ENEMY_BEAM

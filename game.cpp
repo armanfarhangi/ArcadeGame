@@ -38,8 +38,12 @@ Game::Game(QWidget*)
     player->setPos(340, 270);
 
     //spawn enemies
-    Enemy* enemy1 = new Enemy(player);
-    Enemy* enemy2 = new Enemy(player);
-    scene->addItem(enemy1);
-    scene->addItem(enemy2);
+    Enemy* top_enemy1 = new Enemy(player, -10);
+    Enemy* top_enemy2 = new Enemy(player, -10);
+    Enemy* bottom_enemy1 = new Enemy(player, 590);
+    Enemy* bottom_enemy2 = new Enemy(player, 590);
+    scene->addItem(top_enemy1);
+    scene->addItem(top_enemy2);
+    scene->addItem(bottom_enemy1);
+    scene->addItem(bottom_enemy2);
 }
