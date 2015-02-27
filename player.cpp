@@ -30,7 +30,7 @@ Player::Player(int value)
         this->setPos(360, 270);
    }
 
-    else{
+    else {
         setPixmap(QPixmap(":/Images/goku_stand.png"));
         //set player spawn position for Goku
         this->setPos(340, 270);
