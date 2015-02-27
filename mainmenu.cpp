@@ -44,8 +44,8 @@ MainMenu::MainMenu(QWidget*)
 
     //Character select buttons
     QRadioButton* goku_button = new QRadioButton("Goku");
-    QRadioButton* hercule_button = new QRadioButton("Hercule");
-    QRadioButton* saiyaman_button = new QRadioButton("Saiyaman");
+    hercule_button = new QRadioButton("Hercule");
+    saiyaman_button = new QRadioButton("Saiyaman");
     QHBoxLayout* char_buttons = new QHBoxLayout;
     char_buttons->addWidget(goku_button);
     char_buttons->addWidget(hercule_button);
