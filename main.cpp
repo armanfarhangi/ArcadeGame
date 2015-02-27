@@ -14,19 +14,16 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //set random seed so rand() returns a different random number for spawn coordinates on each run
+    //set random seed so rand() returns a different random number for spawn coordinates on each program run
     srand(time(NULL));
 
     //create and show menu window
     MainMenu* menu = new MainMenu;
     menu->show();
 
-    //create game window
-    Game* game = new Game;
-
-    //when BATTLE! is clicked, the game window is shown and the menu window is closed
-    QApplication::connect(menu->battle, SIGNAL(clicked()), game, SLOT(show()));
+    //when BATTLE! is clicked, the menu window is closed and the game window is created and shown
     QApplication::connect(menu->battle, SIGNAL(clicked()), menu, SLOT(close()));
+    QApplication::connect(menu->battle, SIGNAL(clicked()), menu, SLOT(new_game()));
 
     return a.exec();
 }

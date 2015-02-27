@@ -9,6 +9,7 @@
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QButtonGroup>
+#include "game.h"
 
 
 //creates the main window
@@ -22,7 +23,7 @@ MainMenu::MainMenu(QWidget*)
     QLabel* pick_char = new QLabel("<h2>Pick your character:</h2>");
     pick_char->setAlignment(Qt::AlignCenter);
 
-    //Character images
+    //Character select images
     QLabel* goku_label = new QLabel;
     QString fileName(":/Images/Goku_select.png");
     QPixmap* goku_image = new QPixmap(fileName);
@@ -92,4 +93,11 @@ MainMenu::MainMenu(QWidget*)
     this->setLayout(vlay);
 
 
+}
+
+//slot that starts the game after player clicks BATTLE!
+void MainMenu::new_game()
+{
+    Game* game = new Game;
+    game->show();
 }

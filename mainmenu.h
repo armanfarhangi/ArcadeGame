@@ -8,13 +8,17 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QObject>
 
 //main window at beginning to select character and difficulty
 class MainMenu : public QWidget {
+    Q_OBJECT
 public:
     MainMenu(QWidget* parent=0);
     //make BATTLE! button a member so you can pass it to main.cpp connect function
     QPushButton* battle;
+public slots:
+    void new_game();
 };
 
 #endif // MAINMENU
