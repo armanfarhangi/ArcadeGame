@@ -18,7 +18,7 @@ public:
     Enemy(Player* player);
 public slots:
     void set_coor();
-    void move_and_shoot();
+    void move_and_shoot_down();
     void randomize();
 private:
     bool direction;
