@@ -15,11 +15,14 @@ EnemyBeam::EnemyBeam(int direction)
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
+
+    //if 1 was passed, then the beam comes from a top row enemy, so beam shoots down
     if (direction == 1){
         connect(timer, SIGNAL(timeout()), this, SLOT(move_down()));
         timer->start(40);
     }
-    else{
+    //if something else was passed, then the beam comes from bottom row enemy, so beam shoots down
+    else {
         connect(timer, SIGNAL(timeout()), this, SLOT(move_up()));
         timer->start(40);
     }
@@ -27,9 +30,9 @@ EnemyBeam::EnemyBeam(int direction)
 
 void EnemyBeam::move_down(){
     //moves beam down (slower than player beams)
-    setPos(x(), y() + 6);
+    setPos(x(), y() + 4);
     //when bullet reaches end of view, it gets removed and deleted
-    if (y() > 630){
+    if (y() > 655){
         scene()->removeItem(this);
         delete this;
     }
@@ -37,9 +40,9 @@ void EnemyBeam::move_down(){
 
 void EnemyBeam::move_up(){
     //moves beam down (slower than player beams)
-    setPos(x(), y() - 6);
+    setPos(x(), y() - 4);
     //when bullet reaches end of view, it gets removed and deleted
-    if (y() < -20){
+    if (y() < -45){
         scene()->removeItem(this);
         delete this;
     }

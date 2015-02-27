@@ -65,6 +65,7 @@ void Enemy::move_and_shoot_down()
 {
     //if enemy is on-line with player (give or take 8 units), then they shoot down
     if (abs(x()-target_x) <= 8){
+        //1 is used to later allow beam know to move down
         EnemyBeam* beam = new EnemyBeam(1);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
@@ -86,6 +87,7 @@ void Enemy::move_and_shoot_up()
 {
     //if enemy is on-line with player (give or take 8 units), then they shoot up
     if (abs(x()-target_x) <= 8){
+        //2 is used to later let beam know the beam should move up
         EnemyBeam* beam = new EnemyBeam(2);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
