@@ -9,7 +9,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QObject>
-#include <QRadioButton>
+#include <QString>
 
 //main window at beginning to select character and difficulty
 class MainMenu : public QWidget {
@@ -18,8 +18,7 @@ public:
     MainMenu(QWidget* parent=0);
     //make BATTLE! button a member so you can pass it to main.cpp connect function
     QPushButton* battle;
-    QRadioButton* hercule_button;
-    QRadioButton* saiyaman_button;
+    QString character;
 public slots:
     void new_game();
 };
