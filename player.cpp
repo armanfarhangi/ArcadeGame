@@ -19,10 +19,17 @@ Player::Player(int value)
     character = value;
     //creates player
     setPixmap(QPixmap(":/Images/goku_stand.png"));
-    if (value == 1)
+    //set player spawn position for Goku
+    this->setPos(340, 270);
+    if (value == 1){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
+        //spawn position for Hercule
+        this->setPos(360, 270);
+    }
     else if (value == 2)
+        //spawn position for Saiyaman
         setPixmap(QPixmap(":/Images/saiyaman_stand.png"));
+        this->setPos(360, 270);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){

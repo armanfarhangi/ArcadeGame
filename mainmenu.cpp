@@ -134,9 +134,6 @@ void MainMenu::new_game()
     //background
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
 
-    //set initial player position
-    player->setPos(340, 270);
-
     //spawn enemies
     Enemy* top_enemy1 = new Enemy(player, -10);
     Enemy* top_enemy2 = new Enemy(player, -10);
