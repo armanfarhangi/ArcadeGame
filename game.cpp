@@ -78,6 +78,10 @@ Game::Game(QWidget*)
     difficulty_select->addButton(medium);
     difficulty_select->addButton(hard);
 
+    //Instructions
+    QLabel* instructions1 = new QLabel("<h3>Destroy your enemies before they destroy you!</h3>");
+    QLabel* instructions2 = new QLabel("USE ARROW KEYS TO MOVE AND SPACE BAR TO SHOOT");
+
     //BATTLE! button
     battle = new QPushButton("BATTLE!");
 
@@ -89,6 +93,8 @@ Game::Game(QWidget*)
     vlay->addLayout(char_buttons);
     vlay->addWidget(choose_difficulty);
     vlay->addLayout(difficulties);
+    vlay->addWidget(instructions1);
+    vlay->addWidget(instructions2);
     vlay->addWidget(battle);
 
     //Set organized elements to the menu window
