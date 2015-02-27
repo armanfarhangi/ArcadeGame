@@ -37,7 +37,7 @@ Enemy::Enemy(Player* player){
 
     //connects a timer with the move function to create a moving enemy
     QTimer* moving_timer = new QTimer;
-    connect(moving_timer, SIGNAL(timeout()), this, SLOT(move_and_shoot_down()));
+    connect(moving_timer, SIGNAL(timeout()), this, SLOT(move_and_shoot()));
     moving_timer->start(40);
 }
 
@@ -47,7 +47,7 @@ void Enemy::set_coor(){
     target_y = target->y();
 }
 
-void Enemy::move_and_shoot_down()
+void Enemy::move_and_shoot()
 {
     //if enemy is on-line with player (give or take 8 units), then they shoot down
     if (abs(x()-target_x) <= 8){
