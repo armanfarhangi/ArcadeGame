@@ -3,19 +3,19 @@
 // Kamehameha Attack!
 //grid-based game
 
-#include "mainmenu.h"
+#include "game.h"
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QButtonGroup>
-#include "game.h"
 #include "player.h"
 #include "enemies.h"
-
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
 //creates the main window
-MainMenu::MainMenu(QWidget*)
+Game::Game(QWidget*)
 {
     //Title of game
     QLabel* heading = new QLabel("<h1>KAMEHAMEHA ATTACK!</h1>");
@@ -98,18 +98,18 @@ MainMenu::MainMenu(QWidget*)
     QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
 }
 
-void MainMenu::hercule_set()
+void Game::hercule_set()
 {
     character = 1;
 }
 
-void MainMenu::saiyaman_set()
+void Game::saiyaman_set()
 {
     character = 2;
 }
 
 //slot that starts the game after player clicks BATTLE!
-void MainMenu::new_game()
+void Game::start_battle()
 {
     QGraphicsView* view = new QGraphicsView;
     //create the scene (which is the abstract graphic space)

@@ -32,7 +32,7 @@ void EnemyBeam::move_down(){
     //moves beam down (slower than player beams)
     setPos(x(), y() + 4);
     //when bullet reaches end of view, it gets removed and deleted
-    if (y() > 655){
+    if (y() > 660){
         scene()->removeItem(this);
         delete this;
     }
@@ -42,7 +42,7 @@ void EnemyBeam::move_up(){
     //moves beam down (slower than player beams)
     setPos(x(), y() - 4);
     //when bullet reaches end of view, it gets removed and deleted
-    if (y() < -45){
+    if (y() < -50){
         scene()->removeItem(this);
         delete this;
     }

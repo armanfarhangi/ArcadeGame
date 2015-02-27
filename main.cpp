@@ -5,8 +5,7 @@
 
 #include <QApplication>
 #include <player.h>
-#include <game.h>
-#include "mainmenu.h"
+#include "game.h"
 #include <ctime>
 
 
@@ -18,12 +17,12 @@ int main(int argc, char *argv[])
     srand(time(NULL));
 
     //create and show menu window
-    MainMenu* menu = new MainMenu;
-    menu->show();
+    Game* game = new Game;
+    game->show();
 
     //when BATTLE! is clicked, the menu window is closed and the game window is created and shown
-    QApplication::connect(menu->battle, SIGNAL(clicked()), menu, SLOT(close()));
-    QApplication::connect(menu->battle, SIGNAL(clicked()), menu, SLOT(new_game()));
+    QApplication::connect(game->battle, SIGNAL(clicked()), game, SLOT(close()));
+    QApplication::connect(game->battle, SIGNAL(clicked()), game, SLOT(start_battle()));
 
     return a.exec();
 }
