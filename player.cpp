@@ -16,6 +16,7 @@
 Player::Player(int value)
 {
     character = value;
+    cooldown = true;
 
     if (value == 1){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
