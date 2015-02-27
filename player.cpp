@@ -14,10 +14,15 @@
 
 /********************  GOKU  ********************/
 
-Player::Player()
+Player::Player(int value)
 {
+    character = value;
     //creates player
-        setPixmap(QPixmap(":/Images/goku_stand.png"));
+    setPixmap(QPixmap(":/Images/goku_stand.png"));
+    if (value == 1)
+        setPixmap(QPixmap(":/Images/hercule_stand.png"));
+    else if (value == 2)
+        setPixmap(QPixmap(":/Images/saiyaman_stand.png"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -43,9 +48,14 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
     //space will shoot upwards
     else if (event->key() == Qt::Key_Space){
-        //create beam, center it on player, and include it to player's/game's scene
+        //create beam and center it on player (coordinates depend on character selection)
         Beam* beam = new Beam;
-        beam->setPos(x() + 40, y() - 40);
+        if (character == 1)
+            beam->setPos(x() + 23, y() - 40);
+        else if (character == 2)
+            beam->setPos(x() + 23, y() - 40);
+        else
+            beam->setPos(x() + 40, y() - 40);
         scene()->addItem(beam);
     }
 }

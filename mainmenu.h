@@ -18,7 +18,10 @@ public:
     MainMenu(QWidget* parent=0);
     //make BATTLE! button a member so you can pass it to main.cpp connect function
     QPushButton* battle;
+    int character;
 public slots:
+    void hercule_set();
+    void saiyaman_set();
     void new_game();
 };
 

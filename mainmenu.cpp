@@ -10,6 +10,8 @@
 #include <QHBoxLayout>
 #include <QButtonGroup>
 #include "game.h"
+#include "player.h"
+#include "enemies.h"
 
 
 //creates the main window
@@ -91,11 +93,59 @@ MainMenu::MainMenu(QWidget*)
 
     //Set organized elements to the menu window
     this->setLayout(vlay);
+
+    QObject::connect(hercule_button, SIGNAL(clicked()), this, SLOT(hercule_set()));
+    QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
+}
+
+void MainMenu::hercule_set()
+{
+    character = 1;
+}
+
+void MainMenu::saiyaman_set()
+{
+    character = 2;
 }
 
 //slot that starts the game after player clicks BATTLE!
 void MainMenu::new_game()
 {
-    Game* game = new Game;
-    game->show();
+    QGraphicsView* view = new QGraphicsView;
+    //create the scene (which is the abstract graphic space)
+    QGraphicsScene* scene = new QGraphicsScene;
+    //create the player, a graphic item
+    Player* player = new Player(character);
+    scene->addItem(player);
+    //set scene and its items into the view
+    view->setScene(scene);
+    //to set focus on player item automatically
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
+
+    //no scroll bars
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    //Set sizes of scene(abstract space for graphic objects) and view (what user actually sees)
+    view->setFixedSize(657, 670);
+    scene->setSceneRect(56, 0, 657, 670); //specific numbers so I could perfectly fit view/scene to background
+
+    //background
+    scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
+
+    //set initial player position
+    player->setPos(340, 270);
+
+    //spawn enemies
+    Enemy* top_enemy1 = new Enemy(player, -10);
+    Enemy* top_enemy2 = new Enemy(player, -10);
+    Enemy* bottom_enemy1 = new Enemy(player, 590);
+    Enemy* bottom_enemy2 = new Enemy(player, 590);
+    scene->addItem(top_enemy1);
+    scene->addItem(top_enemy2);
+    scene->addItem(bottom_enemy1);
+    scene->addItem(bottom_enemy2);
+
+    view->show();
 }
