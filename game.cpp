@@ -96,6 +96,9 @@ Game::Game(QWidget*)
 
     QObject::connect(hercule_button, SIGNAL(clicked()), this, SLOT(hercule_set()));
     QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
+
+    QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
+    QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
 }
 
 void Game::hercule_set()
@@ -106,6 +109,16 @@ void Game::hercule_set()
 void Game::saiyaman_set()
 {
     character = 2;
+}
+
+void Game::medium_set()
+{
+    difficulty = 1;
+}
+
+void Game::hard_set()
+{
+    difficulty = 2;
 }
 
 //slot that starts the game after player clicks BATTLE!
@@ -139,18 +152,25 @@ void Game::start_battle()
     XEnemy* top_enemy2 = new XEnemy(player, -10);
     XEnemy* bottom_enemy1 = new XEnemy(player, 590);
     XEnemy* bottom_enemy2 = new XEnemy(player, 590);
-    YEnemy* left_enemy1 = new YEnemy(player, 80);
-    YEnemy* left_enemy2 = new YEnemy(player, 80);
-    YEnemy* right_enemy1 = new YEnemy(player, 635);
-    YEnemy* right_enemy2 = new YEnemy(player, 635);
+    if (difficulty == 1){
+        YEnemy* left_enemy1 = new YEnemy(player, 80);
+        YEnemy* left_enemy2 = new YEnemy(player, 80);
+        scene->addItem(left_enemy1);
+        scene->addItem(left_enemy2);
+    }
+    if (difficulty == 2){
+        YEnemy* left_enemy1 = new YEnemy(player, 80);
+        YEnemy* left_enemy2 = new YEnemy(player, 80);
+        scene->addItem(left_enemy1);
+        scene->addItem(left_enemy2);
+        YEnemy* right_enemy1 = new YEnemy(player, 635);
+        YEnemy* right_enemy2 = new YEnemy(player, 635);
+        scene->addItem(right_enemy1);
+        scene->addItem(right_enemy2);
+     }
     scene->addItem(top_enemy1);
     scene->addItem(top_enemy2);
     scene->addItem(bottom_enemy1);
     scene->addItem(bottom_enemy2);
-    scene->addItem(left_enemy1);
-    scene->addItem(left_enemy2);
-    scene->addItem(right_enemy1);
-    scene->addItem(right_enemy2);
-
     view->show();
 }

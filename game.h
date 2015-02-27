@@ -19,9 +19,12 @@ public:
     //make BATTLE! button a member so you can pass it to main.cpp connect function
     QPushButton* battle;
     int character;
+    int difficulty;
 public slots:
     void hercule_set();
     void saiyaman_set();
+    void medium_set();
+    void hard_set();
     void start_battle();
 };
 
