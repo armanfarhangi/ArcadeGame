@@ -20,9 +20,5 @@ int main(int argc, char *argv[])
     Game* game = new Game;
     game->show();
 
-    //when BATTLE! is clicked, the menu window is closed and the game window is created and shown
-    QApplication::connect(game->battle, SIGNAL(clicked()), game, SLOT(close()));
-    QApplication::connect(game->battle, SIGNAL(clicked()), game, SLOT(start_battle()));
-
     return a.exec();
 }

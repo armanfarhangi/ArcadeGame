@@ -13,6 +13,7 @@
 #include "enemies.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QApplication>
 
 //creates the main window
 Game::Game(QWidget*)
@@ -79,11 +80,12 @@ Game::Game(QWidget*)
     difficulty_select->addButton(hard);
 
     //Instructions
+
     QLabel* instructions1 = new QLabel("<h3>Destroy your enemies before they destroy you!</h3>");
     QLabel* instructions2 = new QLabel("USE ARROW KEYS TO MOVE AND SPACE BAR TO SHOOT");
 
     //BATTLE! button
-    battle = new QPushButton("BATTLE!");
+    QPushButton* battle = new QPushButton("BATTLE!");
 
     //Organizing all the previous elements vertically
     QVBoxLayout* vlay = new QVBoxLayout;
@@ -100,11 +102,17 @@ Game::Game(QWidget*)
     //Set organized elements to the menu window
     this->setLayout(vlay);
 
+    //setting character
     QObject::connect(hercule_button, SIGNAL(clicked()), this, SLOT(hercule_set()));
     QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
 
+    //setting difficulty
     QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
+
+    //when BATTLE! is clicked, the menu window is closed and the battle window is created and shown
+    QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(close()));
+    QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(start_battle()));
 }
 
 void Game::hercule_set()
