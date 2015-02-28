@@ -19,6 +19,8 @@ public:
 public slots:
     void move_down();
     void move_up();
+    void move_right();
+    void move_left();
 };
 
 #endif // ENEMY_BEAM

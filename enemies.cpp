@@ -162,7 +162,7 @@ void YEnemy::move_and_shoot_right()
     //if enemy is on-line with player (give or take 8 units), then they shoot right
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
-        EnemyBeam* beam = new EnemyBeam(1);
+        EnemyBeam* beam = new EnemyBeam(3);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
@@ -184,7 +184,7 @@ void YEnemy::move_and_shoot_left()
     //if enemy is on-line with player (give or take 8 units), then they shoot left
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
-        EnemyBeam* beam = new EnemyBeam(1);
+        EnemyBeam* beam = new EnemyBeam(4);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
