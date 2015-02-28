@@ -79,10 +79,9 @@ Game::Game(QWidget*)
     difficulty_select->addButton(medium);
     difficulty_select->addButton(hard);
 
-    //Instructions
-
-    QLabel* instructions1 = new QLabel("<h3>Destroy your enemies before they destroy you!</h3>");
-    QLabel* instructions2 = new QLabel("USE ARROW KEYS TO MOVE AND SPACE BAR TO SHOOT");
+    //Instructions button that shows instructions when clicked
+    QPushButton* instructions = new QPushButton("INSTRUCTIONS");
+    QApplication::connect(instructions, SIGNAL(clicked()), this, SLOT(show_instructions()));
 
     //BATTLE! button
     QPushButton* battle = new QPushButton("BATTLE!");
@@ -95,8 +94,7 @@ Game::Game(QWidget*)
     vlay->addLayout(char_buttons);
     vlay->addWidget(choose_difficulty);
     vlay->addLayout(difficulties);
-    vlay->addWidget(instructions1);
-    vlay->addWidget(instructions2);
+    vlay->addWidget(instructions);
     vlay->addWidget(battle);
 
     //Set organized elements to the menu window
@@ -113,6 +111,27 @@ Game::Game(QWidget*)
     //when BATTLE! is clicked, the menu window is closed and the battle window is created and shown
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(close()));
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(start_battle()));
+}
+
+void Game::show_instructions()
+{
+    QWidget* instruction_window = new QWidget;
+    QLabel* instructions1 = new QLabel("<h3>DESTROY YOUR ENEMIES BEFORE THEY DESTROY YOU!</h3>");
+    QLabel* instructions2 = new QLabel("*** USE ARROW KEYS TO MOVE AND SPACE BAR TO SHOOT ***");
+    instructions2->setAlignment(Qt::AlignCenter);
+    QLabel* instructions3 = new QLabel("*** YOU CAN ONLY SHOOT EVERY COUPLE SECONDS ***");
+    instructions3->setAlignment(Qt::AlignCenter);
+    QPushButton* close = new QPushButton("DONE");
+
+    QVBoxLayout* vlayout = new QVBoxLayout;
+    vlayout->addWidget(instructions1);
+    vlayout->addWidget(instructions2);
+    vlayout->addWidget(instructions3);
+    vlayout->addWidget(close);
+    instruction_window->setLayout(vlayout);
+    instruction_window->show();
+
+    QApplication::connect(close, SIGNAL(clicked()), instruction_window, SLOT(close()));
 }
 
 void Game::hercule_set()

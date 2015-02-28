@@ -25,6 +25,7 @@ public slots:
     void medium_set();
     void hard_set();
     void start_battle();
+    void show_instructions();
 };
 
 #endif // MAINMENU
