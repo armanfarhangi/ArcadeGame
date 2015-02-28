@@ -6,7 +6,8 @@
 #include "enemy_beam.h"
 #include <QTimer>
 #include <QGraphicsScene>
-
+#include "player.h"
+#include <QLabel>
 
 EnemyBeam::EnemyBeam(int direction)
 {
@@ -43,6 +44,24 @@ EnemyBeam::EnemyBeam(int direction)
 }
 
 void EnemyBeam::move_down(){
+    //if the beam collides with player, then destroy both player and enemy and open window that says you've died
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            scene()->removeItem(colliding_items[i]); //remove Player
+            scene()->removeItem(this); //remove Player
+            //memory management (don't delete Player or else glitch)
+            delete this;
+
+            //Then, create window that says you've died
+            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+            you_lose->show();
+
+            //important to return so that the beam that's been deleted doesn't try to move in the code below
+            return;
+        }
+
     //moves beam down (slower than player beams)
     setPos(x(), y() + 4);
     //when bullet reaches past view, it gets removed and deleted
@@ -53,6 +72,23 @@ void EnemyBeam::move_down(){
 }
 
 void EnemyBeam::move_up(){
+    //if the beam collides with player, then destroy both player and enemy and open window that says you've died
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            scene()->removeItem(colliding_items[i]); //remove Player
+            scene()->removeItem(this); //remove Player
+            //memory management (don't delete Player or else glitch)
+            delete this;
+
+            //Then, create window that says you've died
+            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+            you_lose->show();
+
+            //important to return so that the beam that's been deleted doesn't try to move in the code below
+            return;
+        }
     //moves beam down (slower than player beams)
     setPos(x(), y() - 4);
     //when bullet reaches past view, it gets removed and deleted
@@ -64,6 +100,23 @@ void EnemyBeam::move_up(){
 
 void EnemyBeam::move_right()
 {
+    //if the beam collides with player, then destroy both player and enemy and open window that says you've died
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            scene()->removeItem(colliding_items[i]); //remove Player
+            scene()->removeItem(this); //remove Player
+            //memory management (don't delete Player or else glitch)
+            delete this;
+
+            //Then, create window that says you've died
+            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+            you_lose->show();
+
+            //important to return so that the beam that's been deleted doesn't try to move in the code below
+            return;
+        }
     //moves beam down (slower than player beams)
     setPos(x() + 4, y());
     //when bullet reaches end of view, it gets removed and deleted
@@ -75,6 +128,23 @@ void EnemyBeam::move_right()
 
 void EnemyBeam::move_left()
 {
+    //if the beam collides with player, then destroy both player and enemy and open window that says you've died
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            scene()->removeItem(colliding_items[i]); //remove Player
+            scene()->removeItem(this); //remove Player
+            //memory management (don't delete Player or else glitch)
+            delete this;
+
+            //Then, create window that says you've died
+            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+            you_lose->show();
+
+            //important to return so that the beam that's been deleted doesn't try to move in the code below
+            return;
+        }
     //moves beam down (slower than player beams)
     setPos(x() - 4, y());
     //when bullet reaches end of view, it gets removed and deleted
