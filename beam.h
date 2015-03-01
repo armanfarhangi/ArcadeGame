@@ -15,7 +15,8 @@
 class Beam : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    Beam();
+    Beam(int value);
+    int direction;
 public slots:
     void move_and_destroy();
 };

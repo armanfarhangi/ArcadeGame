@@ -136,20 +136,26 @@ void Player::check_keys()
         if (y() < 510)
             setPos(x(), y() + 6);
     }
+
+    //SHOOTING is not a part of the movement if tree
     //space will shoot upwards
-    else if (space){
-        //create beam and center it on player (coordinates depend on character selection)
-        //beam only created if it's been 3 seconds since last shot
-        if (cooldown == true){
-            Beam* beam = new Beam;
-            if (character == 1)
-                beam->setPos(x() + 23, y() - 40);
-            else if (character == 2)
-                beam->setPos(x() + 23, y() - 40);
-            else
-                beam->setPos(x() + 40, y() - 40);
-            scene()->addItem(beam);
-            cooldown = false;
-        }
+    if (up && space)
+        shoot(1);
+}
+
+void Player::shoot(int value)
+{
+    //create beam and center it on player (coordinates depend on character selection)
+    //beam only created if it's been 3 seconds since last shot
+    if (cooldown == true){
+        Beam* beam = new Beam(value);
+        if (character == 1)
+            beam->setPos(x() + 23, y() - 40);
+        else if (character == 2)
+            beam->setPos(x() + 23, y() - 40);
+        else
+            beam->setPos(x() + 40, y() - 40);
+        scene()->addItem(beam);
+        cooldown = false;
     }
 }

@@ -22,6 +22,7 @@ public:
     bool up;
     bool down;
     bool space;
+    void shoot(int value);
 public slots:
     void cooled_down();
     void check_keys();

@@ -9,9 +9,12 @@
 #include <QList>
 #include "enemies.h"
 
-Beam::Beam(){
+Beam::Beam(int value){
     //creates a beam
     setPixmap(QPixmap(":/Images/up_down.png"));
+
+    //sets direction: 1 up 2 down 3 left 4 right
+    direction = value;
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
@@ -26,7 +29,8 @@ void Beam::move_and_destroy()
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(XEnemy)){ //if type of colliding_items[i] is Enemy
+        if (typeid(*(colliding_items[i])) == typeid(XEnemy)
+        || typeid(*(colliding_items[i])) == typeid(YEnemy)){ //if type of colliding_items[i] is Enemy
             scene()->removeItem(colliding_items[i]); //remove Enemy
             scene()->removeItem(this); //remove beam
             //memory management
@@ -36,11 +40,13 @@ void Beam::move_and_destroy()
             return;
         }
 
-    //moves bullet up
-    setPos(x(), y() - 6);
-    //when bullet reaches end of view, it gets removed and deleted
-    if (y() < -50){
-        scene()->removeItem(this);
-        delete this;
+    if (direction == 1){
+        //moves bullet up
+        setPos(x(), y() - 6);
+        //when bullet reaches end of view, it gets removed and deleted
+        if (y() < -50){
+            scene()->removeItem(this);
+            delete this;
+        }
     }
 }
