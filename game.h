@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QObject>
 #include <QString>
+#include <QGraphicsView>
 
 //main window at beginning to select character and difficulty
 class Game : public QWidget {
@@ -19,6 +20,7 @@ public:
     //make BATTLE! button a member so you can pass it to main.cpp connect function
     int character;
     int difficulty;
+    QGraphicsView* view;
 public slots:
     void hercule_set();
     void saiyaman_set();

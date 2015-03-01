@@ -157,7 +157,7 @@ void Game::hard_set()
 //slot that starts the game after player clicks BATTLE!
 void Game::start_battle()
 {
-    QGraphicsView* view = new QGraphicsView;
+    view = new QGraphicsView;
     //create the scene (which is the abstract graphic space)
     QGraphicsScene* scene = new QGraphicsScene;
     //create the player, a graphic item
@@ -181,29 +181,29 @@ void Game::start_battle()
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
 
     //spawn enemies
-    XEnemy* top_enemy1 = new XEnemy(player, -10);
-    XEnemy* top_enemy2 = new XEnemy(player, -10);
-    XEnemy* bottom_enemy1 = new XEnemy(player, 590);
-    XEnemy* bottom_enemy2 = new XEnemy(player, 590);
-    if (difficulty == 1){
-        YEnemy* left_enemy1 = new YEnemy(player, 80);
-        YEnemy* left_enemy2 = new YEnemy(player, 80);
-        scene->addItem(left_enemy1);
-        scene->addItem(left_enemy2);
-    }
-    if (difficulty == 2){
-        YEnemy* left_enemy1 = new YEnemy(player, 80);
-        YEnemy* left_enemy2 = new YEnemy(player, 80);
-        scene->addItem(left_enemy1);
-        scene->addItem(left_enemy2);
-        YEnemy* right_enemy1 = new YEnemy(player, 635);
-        YEnemy* right_enemy2 = new YEnemy(player, 635);
-        scene->addItem(right_enemy1);
-        scene->addItem(right_enemy2);
-     }
+    XEnemy* top_enemy1 = new XEnemy(player, -10, this);
+    XEnemy* top_enemy2 = new XEnemy(player, -10, this);
+    XEnemy* bottom_enemy1 = new XEnemy(player, 590, this);
+    XEnemy* bottom_enemy2 = new XEnemy(player, 590, this);
     scene->addItem(top_enemy1);
     scene->addItem(top_enemy2);
     scene->addItem(bottom_enemy1);
     scene->addItem(bottom_enemy2);
+    if (difficulty == 1){
+        YEnemy* left_enemy1 = new YEnemy(player, 60, this);
+        YEnemy* left_enemy2 = new YEnemy(player, 60, this);
+        scene->addItem(left_enemy1);
+        scene->addItem(left_enemy2);
+    }
+    if (difficulty == 2){
+        YEnemy* left_enemy1 = new YEnemy(player, 60, this);
+        YEnemy* left_enemy2 = new YEnemy(player, 60, this);
+        scene->addItem(left_enemy1);
+        scene->addItem(left_enemy2);
+        YEnemy* right_enemy1 = new YEnemy(player, 655, this);
+        YEnemy* right_enemy2 = new YEnemy(player, 655, this);
+        scene->addItem(right_enemy1);
+        scene->addItem(right_enemy2);
+     }
     view->show();
 }

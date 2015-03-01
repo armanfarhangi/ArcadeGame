@@ -8,9 +8,17 @@
 #include <QGraphicsScene>
 #include "player.h"
 #include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include "game.h"
+#include <QObject>
+#include <QApplication>
 
-EnemyBeam::EnemyBeam(int direction)
+
+EnemyBeam::EnemyBeam(int direction, Game* param_game)
 {
+    game = param_game;
+
     //creates a beam
     if (direction == 1 || direction == 2)
         setPixmap(QPixmap(":/Images/enemy_up_down.png"));
@@ -43,6 +51,28 @@ EnemyBeam::EnemyBeam(int direction)
     }
 }
 
+void EnemyBeam::game_over(){
+    QWidget* game_over_menu = new QWidget;
+
+    QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+    you_lose->setAlignment(Qt::AlignCenter);
+    QPushButton* restart = new QPushButton("TRY AGAIN");
+    QPushButton* change_difficulty = new QPushButton("CHANGE DIFFICULTY");
+    QPushButton* quit = new QPushButton("QUIT");
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget(you_lose);
+    layout->addWidget(restart);
+    layout->addWidget(change_difficulty);
+    layout->addWidget(quit);
+
+    game_over_menu->setLayout(layout);
+    game_over_menu->show();
+
+    //connect(restart, SIGNAL(clicked()), game->view, SLOT(hide()));
+    //connect(restart, SIGNAL(clicked()), game, SLOT(start_battle()));
+}
+
 void EnemyBeam::move_down(){
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
     //this list holds all the items that the beam collides with
@@ -54,9 +84,8 @@ void EnemyBeam::move_down(){
             //memory management (don't delete Player or else glitch)
             delete this;
 
-            //Then, create window that says you've died
-            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
-            you_lose->show();
+            //game over menu
+            game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -82,9 +111,8 @@ void EnemyBeam::move_up(){
             //memory management (don't delete Player or else glitch)
             delete this;
 
-            //Then, create window that says you've died
-            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
-            you_lose->show();
+            //game over menu
+            game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -110,9 +138,8 @@ void EnemyBeam::move_right()
             //memory management (don't delete Player or else glitch)
             delete this;
 
-            //Then, create window that says you've died
-            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
-            you_lose->show();
+            //game over menu
+            game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -138,9 +165,8 @@ void EnemyBeam::move_left()
             //memory management (don't delete Player or else glitch)
             delete this;
 
-            //Then, create window that says you've died
-            QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
-            you_lose->show();
+            //game over menu
+            game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;

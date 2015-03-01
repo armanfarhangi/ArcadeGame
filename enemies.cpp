@@ -8,10 +8,12 @@
 #include <QGraphicsScene>
 #include "enemy_beam.h"
 #include <cmath>
+#include "player.h"
 
-XEnemy::XEnemy(Player* player, int y_coor){
+XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
     //in order to
     target = player;
+    game = param_game;
 
     //constantly store player's coordinates
     QTimer* coor_timer = new QTimer;
@@ -66,7 +68,7 @@ void XEnemy::move_and_shoot_down()
     //if enemy is on-line with player (give or take 8 units), then they shoot down
     if (abs(x()-target_x) <= 8){
         //1 is used to later allow beam know to move down
-        EnemyBeam* beam = new EnemyBeam(1);
+        EnemyBeam* beam = new EnemyBeam(1, game);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
@@ -88,7 +90,7 @@ void XEnemy::move_and_shoot_up()
     //if enemy is on-line with player (give or take 8 units), then they shoot up
     if (abs(x()-target_x) <= 8){
         //2 is used to later let beam know the beam should move up
-        EnemyBeam* beam = new EnemyBeam(2);
+        EnemyBeam* beam = new EnemyBeam(2, game);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
@@ -105,9 +107,10 @@ void XEnemy::move_and_shoot_up()
             direction = 1;
 }
 
-YEnemy::YEnemy(Player* player, int x_coor){
+YEnemy::YEnemy(Player* player, int x_coor, Game* param_game){
     //in order to
     target = player;
+    game = param_game;
 
     //constantly store player's coordinates
     QTimer* coor_timer = new QTimer;
@@ -153,7 +156,7 @@ void YEnemy::randomize()
 void YEnemy::move_and_shoot()
 {
     //depending on the edge enemy is on, they will shoot in a certain direction
-    if (x() == 80) move_and_shoot_right();
+    if (x() == 60) move_and_shoot_right();
     else move_and_shoot_left();
 }
 
@@ -162,7 +165,7 @@ void YEnemy::move_and_shoot_right()
     //if enemy is on-line with player (give or take 8 units), then they shoot right
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
-        EnemyBeam* beam = new EnemyBeam(3);
+        EnemyBeam* beam = new EnemyBeam(3, game);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
@@ -184,7 +187,7 @@ void YEnemy::move_and_shoot_left()
     //if enemy is on-line with player (give or take 8 units), then they shoot left
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
-        EnemyBeam* beam = new EnemyBeam(4);
+        EnemyBeam* beam = new EnemyBeam(4, game);
         beam->setPos(x() + 10, y());
         scene()->addItem(beam);
     }
