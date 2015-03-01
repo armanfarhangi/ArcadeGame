@@ -68,9 +68,6 @@ void EnemyBeam::game_over(){
 
     game_over_menu->setLayout(layout);
     game_over_menu->show();
-
-    //connect(restart, SIGNAL(clicked()), game->view, SLOT(hide()));
-    //connect(restart, SIGNAL(clicked()), game, SLOT(start_battle()));
 }
 
 void EnemyBeam::move_down(){

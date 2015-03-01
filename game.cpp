@@ -109,7 +109,7 @@ Game::Game(QWidget*)
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
 
     //when BATTLE! is clicked, the menu window is closed and the battle window is created and shown
-    QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(close()));
+    QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(hide()));
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(start_battle()));
 }
 
