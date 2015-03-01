@@ -21,6 +21,7 @@ public:
     int character;
     int difficulty;
     QGraphicsView* view;
+    void game_over();
 public slots:
     void hercule_set();
     void saiyaman_set();

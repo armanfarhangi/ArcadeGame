@@ -108,9 +108,42 @@ Game::Game(QWidget*)
     QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
 
-    //when BATTLE! is clicked, the menu window is closed and the battle window is created and shown
+    //when BATTLE! is clicked, the menu window is hidden and the battle window is created and shown
+    //hide menu window, don't destroy it; this way you can save character and difficulty information
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(hide()));
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(start_battle()));
+}
+
+void Game::game_over()
+{
+    QWidget* game_over_menu = new QWidget;
+
+    QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
+    you_lose->setAlignment(Qt::AlignCenter);
+    QPushButton* restart = new QPushButton("TRY AGAIN");
+    QPushButton* change_options = new QPushButton("CHANGE OPTIONS");
+    QPushButton* quit = new QPushButton("QUIT");
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget(you_lose);
+    layout->addWidget(restart);
+    layout->addWidget(change_options);
+    layout->addWidget(quit);
+
+    game_over_menu->setLayout(layout);
+    game_over_menu->show();
+
+    connect(restart, SIGNAL(clicked()), view, SLOT(close()));
+    connect(restart, SIGNAL(clicked()), game_over_menu, SLOT(close()));
+    connect(restart, SIGNAL(clicked()), this, SLOT(start_battle()));
+
+    connect(change_options, SIGNAL(clicked()), view, SLOT(close()));
+    connect(change_options, SIGNAL(clicked()), game_over_menu, SLOT(close()));
+    connect(change_options, SIGNAL(clicked()), this, SLOT(show()));
+
+    connect(quit, SIGNAL(clicked()), view, SLOT(close()));
+    connect(quit, SIGNAL(clicked()), game_over_menu, SLOT(close()));
+    connect(quit, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 void Game::show_instructions()

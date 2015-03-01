@@ -52,22 +52,9 @@ EnemyBeam::EnemyBeam(int direction, Game* param_game)
 }
 
 void EnemyBeam::game_over(){
-    QWidget* game_over_menu = new QWidget;
-
-    QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
-    you_lose->setAlignment(Qt::AlignCenter);
-    QPushButton* restart = new QPushButton("TRY AGAIN");
-    QPushButton* change_difficulty = new QPushButton("CHANGE DIFFICULTY");
-    QPushButton* quit = new QPushButton("QUIT");
-
-    QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(you_lose);
-    layout->addWidget(restart);
-    layout->addWidget(change_difficulty);
-    layout->addWidget(quit);
-
-    game_over_menu->setLayout(layout);
-    game_over_menu->show();
+    //can't close scene/view in EnemyBeam because it's part of the scene/view
+    //so then, allow Game object to do so
+    game->game_over();
 }
 
 void EnemyBeam::move_down(){
