@@ -141,6 +141,8 @@ void Player::check_keys()
     //space will shoot upwards
     if (up && space)
         shoot(1);
+    else if (down && space)
+        shoot(2);
 }
 
 void Player::shoot(int value)

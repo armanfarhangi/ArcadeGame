@@ -49,4 +49,13 @@ void Beam::move_and_destroy()
             delete this;
         }
     }
+    else if (direction == 2){
+        //moves bullet up
+        setPos(x(), y() + 6);
+        //when bullet reaches end of view, it gets removed and deleted
+        if (y() > 660){
+            scene()->removeItem(this);
+            delete this;
+        }
+    }
 }
