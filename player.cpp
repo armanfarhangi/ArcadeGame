@@ -49,7 +49,7 @@ Player::Player(int value)
     //very often check which keys have been pressed
     QTimer* timer2 = new QTimer;
     connect(timer2, SIGNAL(timeout()), this, SLOT(check_keys()));
-    timer2->start(40);
+    timer2->start(45);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -99,42 +99,42 @@ void Player::check_keys()
     //up-left movement
     if (left && up){
         if (x() > 90 && y() > 50)
-            setPos(x() - 10, y() - 10);
+            setPos(x() - 6, y() - 6);
     }
     //right-up movement
     else if (right && up){
         if (x() < 570 && y() > 50)
-            setPos(x() + 10, y() - 10);
+            setPos(x() + 6, y() - 6);
     }
     //left down movement
     else if (left && down){
         if (x() > 90 && y() < 510)
-            setPos(x() - 10, y() + 10);
+            setPos(x() - 6, y() + 6);
     }
     //right down movement
     else if (right & down){
         if (x() < 570 && y() < 510)
-            setPos(x() + 10, y() + 10);
+            setPos(x() + 6, y() + 6);
     }
     //able to move left as long as top left of Goku is right of platform edge
     else if (left){
         if (x() > 90)
-            setPos(x() - 10, y());
+            setPos(x() - 6, y());
     }
     //able to move right as long as top left of goku is left of platform edge
     else if (right){
         if (x() < 570)
-            setPos(x() + 10, y());
+            setPos(x() + 6, y());
     }
     //able to move up as long as goku is under top platform edge
     else if (up){ //-10 to go up because y axis is inverted
         if (y() > 50)
-            setPos(x(), y() - 10);
+            setPos(x(), y() - 6);
     }
     //able to move down as long as goku is above bottom platform edge
     else if (down){//same reason for down being +10
         if (y() < 510)
-            setPos(x(), y() + 10);
+            setPos(x(), y() + 6);
     }
     //space will shoot upwards
     else if (space){
