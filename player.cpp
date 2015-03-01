@@ -17,6 +17,11 @@ Player::Player(int value)
 {
     character = value;
     cooldown = true;
+    left = false;
+    right = false;
+    up = false;
+    down = false;
+    space = false;
 
     if (value == 1){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
@@ -37,34 +42,102 @@ Player::Player(int value)
     }
 
     //every two seconds, the player can shoot again
-    QTimer* timer = new QTimer;
-    connect(timer, SIGNAL(timeout()), this, SLOT(cooled_down()));
-    timer->start(2000);
+    QTimer* timer1 = new QTimer;
+    connect(timer1, SIGNAL(timeout()), this, SLOT(cooled_down()));
+    timer1->start(2000);
+
+    //very often check which keys have been pressed
+    QTimer* timer2 = new QTimer;
+    connect(timer2, SIGNAL(timeout()), this, SLOT(check_keys()));
+    timer2->start(40);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
-    //able to move left as long as top left of Goku is right of platform edge
     if (event->key() == Qt::Key_Left){
+        left = true;
+    }
+    else if (event->key() == Qt::Key_Right){
+        right = true;
+    }
+    else if (event->key() == Qt::Key_Up){
+        up = true;
+    }
+    else if (event->key() == Qt::Key_Down){
+        down = true;
+    }
+    else if (event->key() == Qt::Key_Space){
+        space = true;
+    }
+}
+
+void Player::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Left){
+        left = false;
+    }
+    else if (event->key() == Qt::Key_Right){
+        right = false;
+    }
+    else if (event->key() == Qt::Key_Up){
+        up = false;
+    }
+    else if (event->key() == Qt::Key_Down){
+        down = false;
+    }
+    else if (event->key() == Qt::Key_Space){
+        space = false;
+    }
+}
+
+void Player::cooled_down()
+{
+    cooldown = true;
+}
+
+void Player::check_keys()
+{
+    //up-left movement
+    if (left && up){
+        if (x() > 90 && y() > 50)
+            setPos(x() - 10, y() - 10);
+    }
+    //right-up movement
+    else if (right && up){
+        if (x() < 570 && y() > 50)
+            setPos(x() + 10, y() - 10);
+    }
+    //left down movement
+    else if (left && down){
+        if (x() > 90 && y() < 510)
+            setPos(x() - 10, y() + 10);
+    }
+    //right down movement
+    else if (right & down){
+        if (x() < 570 && y() < 510)
+            setPos(x() + 10, y() + 10);
+    }
+    //able to move left as long as top left of Goku is right of platform edge
+    else if (left){
         if (x() > 90)
             setPos(x() - 10, y());
     }
     //able to move right as long as top left of goku is left of platform edge
-    else if (event->key() == Qt::Key_Right){
-        if (x()  < 570)
+    else if (right){
+        if (x() < 570)
             setPos(x() + 10, y());
     }
     //able to move up as long as goku is under top platform edge
-    else if (event->key() == Qt::Key_Up){ //-10 to go up because y axis is inverted
+    else if (up){ //-10 to go up because y axis is inverted
         if (y() > 50)
             setPos(x(), y() - 10);
     }
     //able to move down as long as goku is above bottom platform edge
-    else if (event->key() == Qt::Key_Down){//same reason for down being +10
+    else if (down){//same reason for down being +10
         if (y() < 510)
             setPos(x(), y() + 10);
     }
     //space will shoot upwards
-    else if (event->key() == Qt::Key_Space){
+    else if (space){
         //create beam and center it on player (coordinates depend on character selection)
         //beam only created if it's been 3 seconds since last shot
         if (cooldown == true){
@@ -79,9 +152,4 @@ void Player::keyPressEvent(QKeyEvent *event){
             cooldown = false;
         }
     }
-}
-
-void Player::cooled_down()
-{
-    cooldown = true;
 }
