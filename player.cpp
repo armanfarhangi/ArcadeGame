@@ -137,12 +137,16 @@ void Player::check_keys()
             setPos(x(), y() + 6);
     }
 
-    //SHOOTING is not a part of the movement if tree
+    //SHOOTING is not a part of the movement if-tree
     //space will shoot upwards
     if (up && space)
         shoot(1);
     else if (down && space)
         shoot(2);
+    else if (left && space)
+        shoot(3);
+    else if (right && space)
+        shoot(4);
 }
 
 void Player::shoot(int value)

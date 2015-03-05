@@ -10,11 +10,13 @@
 #include "enemies.h"
 
 Beam::Beam(int value){
-    //creates a beam
-    setPixmap(QPixmap(":/Images/up_down.png"));
-
-    //sets direction: 1 up 2 down 3 left 4 right
+    //creates a beam//sets direction: 1 up 2 down 3 left 4 right
     direction = value;
+
+    if (value == 1 || value == 2)
+        setPixmap(QPixmap(":/Images/up_down.png"));
+    else if (value == 3 || value == 4)
+        setPixmap(QPixmap(":/Images/left_right.png"));
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
@@ -54,6 +56,24 @@ void Beam::move_and_destroy()
         setPos(x(), y() + 6);
         //when bullet reaches end of view, it gets removed and deleted
         if (y() > 660){
+            scene()->removeItem(this);
+            delete this;
+        }
+    }
+    else if (direction == 3){
+        //moves bullet left
+        setPos(x() - 6, y());
+        //when bullet reaches end of view, it gets removed and deleted
+        if (x() < 0){
+            scene()->removeItem(this);
+            delete this;
+        }
+    }
+    else if (direction == 4){
+        //moves bullet right
+        setPos(x() + 6, y());
+        //when bullet reaches end of view, it gets removed and deleted
+        if (x() > 670){
             scene()->removeItem(this);
             delete this;
         }
