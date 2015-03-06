@@ -145,7 +145,7 @@ void EnemyBeam::move_left()
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             scene()->removeItem(colliding_items[i]); //remove Player
-            scene()->removeItem(this); //remove Player
+            scene()->removeItem(this); //remove Beam
             //memory management (don't delete Player or else glitch)
             delete this;
 
