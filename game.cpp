@@ -101,10 +101,12 @@ Game::Game(QWidget*)
     this->setLayout(vlay);
 
     //setting character
+    QObject::connect(goku_button, SIGNAL(clicked()), this, SLOT(goku_set()));
     QObject::connect(hercule_button, SIGNAL(clicked()), this, SLOT(hercule_set()));
     QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
 
     //setting difficulty
+    QObject::connect(easy, SIGNAL(clicked()), this, SLOT(easy_set()));
     QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
 
@@ -167,6 +169,11 @@ void Game::show_instructions()
     QApplication::connect(close, SIGNAL(clicked()), instruction_window, SLOT(close()));
 }
 
+void Game::goku_set()
+{
+    character = 3;
+}
+
 void Game::hercule_set()
 {
     character = 1;
@@ -175,6 +182,11 @@ void Game::hercule_set()
 void Game::saiyaman_set()
 {
     character = 2;
+}
+
+void Game::easy_set()
+{
+    difficulty = 3;
 }
 
 void Game::medium_set()

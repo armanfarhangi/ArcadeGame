@@ -23,8 +23,10 @@ public:
     QGraphicsView* view;
     void game_over();
 public slots:
+    void goku_set();
     void hercule_set();
     void saiyaman_set();
+    void easy_set();
     void medium_set();
     void hard_set();
     void start_battle();
