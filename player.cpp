@@ -138,8 +138,13 @@ void Player::check_keys()
     }
 
     //SHOOTING is not a part of the movement if-tree
-    //space will shoot upwards
-    if (up && space)
+    //space by itself will create a shield
+    if (space && !up && !down && !left && !right){
+        Shield* shield = new Shield;
+        shield->setPos(x(), y());
+        scene()->addItem(shield);
+    }
+    else if (up && space)
         shoot(1);
     else if (down && space)
         shoot(2);
@@ -165,4 +170,10 @@ void Player::shoot(int value)
         cooldown = false;
         shoot_timer->start(2000);
     }
+}
+
+
+Shield::Shield()
+{
+    setPixmap(QPixmap(":Images/shield_sprite.png"));
 }

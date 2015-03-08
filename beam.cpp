@@ -52,7 +52,7 @@ void Beam::move_and_destroy()
         }
     }
     else if (direction == 2){
-        //moves bullet up
+        //moves bullet down
         setPos(x(), y() + 6);
         //when bullet reaches end of view, it gets removed and deleted
         if (y() > 660){

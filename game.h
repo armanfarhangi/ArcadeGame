@@ -17,7 +17,6 @@ class Game : public QWidget {
     Q_OBJECT
 public:
     Game(QWidget* parent=0);
-    //make BATTLE! button a member so you can pass it to main.cpp connect function
     int character;
     int difficulty;
     QGraphicsView* view;

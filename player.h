@@ -30,5 +30,10 @@ public slots:
     void check_keys();
 };
 
+class Shield : public QGraphicsPixmapItem {
+public:
+    Shield();
+};
+
 #endif // PLAYER
 
