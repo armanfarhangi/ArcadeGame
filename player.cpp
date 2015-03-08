@@ -42,14 +42,13 @@ Player::Player(int value)
     }
 
     //every two seconds, the player can shoot again
-    QTimer* timer1 = new QTimer;
-    connect(timer1, SIGNAL(timeout()), this, SLOT(cooled_down()));
-    timer1->start(2000);
+    shoot_timer = new QTimer;
+    connect(shoot_timer, SIGNAL(timeout()), this, SLOT(cooled_down()));
 
     //very often check which keys have been pressed
-    QTimer* timer2 = new QTimer;
-    connect(timer2, SIGNAL(timeout()), this, SLOT(check_keys()));
-    timer2->start(45);
+    QTimer* smooth_timer = new QTimer;
+    connect(smooth_timer, SIGNAL(timeout()), this, SLOT(check_keys()));
+    smooth_timer->start(45);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -92,6 +91,7 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 void Player::cooled_down()
 {
     cooldown = true;
+    shoot_timer->stop();
 }
 
 void Player::check_keys()
@@ -163,5 +163,6 @@ void Player::shoot(int value)
             beam->setPos(x() + 40, y() - 40);
         scene()->addItem(beam);
         cooldown = false;
+        shoot_timer->start(2000);
     }
 }

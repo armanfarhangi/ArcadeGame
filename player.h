@@ -8,6 +8,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include <QTimer>
 
 class Player : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -16,6 +17,7 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
     Player(int value);
     int character;
+    QTimer* shoot_timer;
     bool cooldown;
     bool left;
     bool right;
