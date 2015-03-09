@@ -24,23 +24,23 @@ Player::Player(int value)
     down = false;
     space = false;
 
-    if (value == 1){
+    if (character == 1) {
+        setPixmap(QPixmap(":/Images/goku_stand.png"));
+        //set player spawn position for Goku
+        this->setPos(340, 270);
+    }
+
+    else if (character == 2){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
         //spawn position for Hercule
         this->setPos(360, 270);
     }
 
-    else if (value == 2){
+    else if (character == 3){
         //spawn position for Saiyaman
         setPixmap(QPixmap(":/Images/saiyaman_stand.png"));
         this->setPos(360, 270);
    }
-
-    else {
-        setPixmap(QPixmap(":/Images/goku_stand.png"));
-        //set player spawn position for Goku
-        this->setPos(340, 270);
-    }
 
     //very often check which keys have been pressed
     QTimer* smooth_timer = new QTimer;

@@ -171,32 +171,32 @@ void Game::show_instructions()
 
 void Game::goku_set()
 {
-    character = 3;
+    character = 1;
 }
 
 void Game::hercule_set()
 {
-    character = 1;
+    character = 2;
 }
 
 void Game::saiyaman_set()
 {
-    character = 2;
+    character = 3;
 }
 
 void Game::easy_set()
 {
-    difficulty = 3;
+    difficulty = 1;
 }
 
 void Game::medium_set()
 {
-    difficulty = 1;
+    difficulty = 2;
 }
 
 void Game::hard_set()
 {
-    difficulty = 2;
+    difficulty = 3;
 }
 
 //slot that starts the game after player clicks BATTLE!
@@ -234,13 +234,13 @@ void Game::start_battle()
     scene->addItem(top_enemy2);
     scene->addItem(bottom_enemy1);
     scene->addItem(bottom_enemy2);
-    if (difficulty == 1){
+    if (difficulty == 2){
         YEnemy* left_enemy1 = new YEnemy(player, 60, this);
         YEnemy* left_enemy2 = new YEnemy(player, 60, this);
         scene->addItem(left_enemy1);
         scene->addItem(left_enemy2);
     }
-    if (difficulty == 2){
+    if (difficulty == 3){
         YEnemy* left_enemy1 = new YEnemy(player, 60, this);
         YEnemy* left_enemy2 = new YEnemy(player, 60, this);
         scene->addItem(left_enemy1);
