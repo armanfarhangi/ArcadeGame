@@ -104,6 +104,7 @@ Game::Game(QWidget*)
     QObject::connect(goku_button, SIGNAL(clicked()), this, SLOT(goku_set()));
     QObject::connect(hercule_button, SIGNAL(clicked()), this, SLOT(hercule_set()));
     QObject::connect(saiyaman_button, SIGNAL(clicked()), this, SLOT(saiyaman_set()));
+    character = 1; //default
 
     //setting difficulty
     QObject::connect(easy, SIGNAL(clicked()), this, SLOT(easy_set()));

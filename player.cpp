@@ -109,6 +109,7 @@ void Player::shield_cooled_down()
 
 void Player::check_keys()
 {
+    if (character == 1){
     //up-left movement
     if (left && up){
         if (x() > 111 && y() > 70)
@@ -148,6 +149,50 @@ void Player::check_keys()
     else if (down){//same reason for down being +10
         if (y() < 510)
             setPos(x(), y() + 6);
+    }
+    }
+
+    else if (character == 2 || character == 3){
+        //up-left movement
+        if (left && up){
+            if (x() > 120 && y() > 70)
+                setPos(x() - 6, y() - 6);
+        }
+        //right-up movement
+        else if (right && up){
+            if (x() < 606 && y() > 70)
+                setPos(x() + 6, y() - 6);
+        }
+        //left down movement
+        else if (left && down){
+            if (x() > 120 && y() < 520)
+                setPos(x() - 6, y() + 6);
+        }
+        //right down movement
+        else if (right & down){
+            if (x() < 606 && y() < 520)
+                setPos(x() + 6, y() + 6);
+        }
+        //able to move left as long as top left of Goku is right of platform edge
+        else if (left){
+            if (x() > 120)
+                setPos(x() - 6, y());
+        }
+        //able to move right as long as top left of goku is left of platform edge
+        else if (right){
+            if (x() < 606)
+                setPos(x() + 6, y());
+        }
+        //able to move up as long as goku is under top platform edge
+        else if (up){ //-10 to go up because y axis is inverted
+            if (y() > 70)
+                setPos(x(), y() - 6);
+        }
+        //able to move down as long as goku is above bottom platform edge
+        else if (down){//same reason for down being +10
+            if (y() < 520)
+                setPos(x(), y() + 6);
+        }
     }
 
     //SHOOTING is not a part of the movement if-tree
