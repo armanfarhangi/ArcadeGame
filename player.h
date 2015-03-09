@@ -18,7 +18,9 @@ public:
     Player(int value);
     int character;
     QTimer* shoot_timer;
-    bool cooldown;
+    QTimer* shield_timer;
+    bool shoot_cooldown;
+    bool shield_cooldown;
     bool left;
     bool right;
     bool up;
@@ -26,7 +28,8 @@ public:
     bool space;
     void shoot(int value);
 public slots:
-    void cooled_down();
+    void shoot_cooled_down();
+    void shield_cooled_down();
     void check_keys();
 };
 

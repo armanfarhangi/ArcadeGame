@@ -16,7 +16,8 @@
 Player::Player(int value)
 {
     character = value;
-    cooldown = true;
+    shoot_cooldown = true;
+    shield_cooldown = true;
     left = false;
     right = false;
     up = false;
@@ -41,14 +42,18 @@ Player::Player(int value)
         this->setPos(340, 270);
     }
 
-    //every two seconds, the player can shoot again
-    shoot_timer = new QTimer;
-    connect(shoot_timer, SIGNAL(timeout()), this, SLOT(cooled_down()));
-
     //very often check which keys have been pressed
     QTimer* smooth_timer = new QTimer;
     connect(smooth_timer, SIGNAL(timeout()), this, SLOT(check_keys()));
     smooth_timer->start(45);
+
+    //two seconds after shooting, the player can shoot again
+    shoot_timer = new QTimer;
+    connect(shoot_timer, SIGNAL(timeout()), this, SLOT(shoot_cooled_down()));
+
+    //10 seconds after shooting, the player can shoot again
+    shield_timer = new QTimer;
+    connect(shield_timer, SIGNAL(timeout()), this, SLOT(shield_cooled_down()));
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -88,10 +93,16 @@ void Player::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void Player::cooled_down()
+void Player::shoot_cooled_down()
 {
-    cooldown = true;
+    shoot_cooldown = true;
     shoot_timer->stop();
+}
+
+void Player::shield_cooled_down()
+{
+    shield_cooldown = true;
+    shield_timer->stop();
 }
 
 void Player::check_keys()
@@ -139,9 +150,12 @@ void Player::check_keys()
 
     //SHOOTING is not a part of the movement if-tree
     //space by itself will create a shield
-    if (space && !up && !down && !left && !right){
+    if (space && shield_cooldown && !up && !down && !left && !right){
         Shield* shield = new Shield(this);
         scene()->addItem(shield);
+        shield_cooldown = false;
+        shield_timer->start(9000);
+
     }
     else if (up && space)
         shoot(1);
@@ -157,7 +171,7 @@ void Player::shoot(int value)
 {
     //create beam and center it on player (coordinates depend on character selection)
     //beam only created if it's been 3 seconds since last shot
-    if (cooldown == true){
+    if (shoot_cooldown == true){
         Beam* beam = new Beam(value);
         if (character == 1)
             beam->setPos(x() + 23, y() - 40);
@@ -166,7 +180,7 @@ void Player::shoot(int value)
         else
             beam->setPos(x() + 40, y() - 40);
         scene()->addItem(beam);
-        cooldown = false;
+        shoot_cooldown = false;
         shoot_timer->start(2000);
     }
 }
@@ -183,7 +197,7 @@ Shield::Shield(Player* player)
 
     QTimer* shield_timer = new QTimer;
     connect(shield_timer, SIGNAL(timeout()), this, SLOT(stop()));
-    shield_timer->start(10000);
+    shield_timer->start(5000);
 }
 
 void Shield::follow()
