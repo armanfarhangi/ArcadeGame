@@ -140,8 +140,7 @@ void Player::check_keys()
     //SHOOTING is not a part of the movement if-tree
     //space by itself will create a shield
     if (space && !up && !down && !left && !right){
-        Shield* shield = new Shield;
-        shield->setPos(x(), y());
+        Shield* shield = new Shield(this);
         scene()->addItem(shield);
     }
     else if (up && space)
@@ -173,7 +172,27 @@ void Player::shoot(int value)
 }
 
 
-Shield::Shield()
+Shield::Shield(Player* player)
 {
+    character = player;
+    setPos(character->x(), character->y());
     setPixmap(QPixmap(":Images/shield_sprite.png"));
+    QTimer* follow_timer = new QTimer;
+    connect(follow_timer, SIGNAL(timeout()), this, SLOT(follow()));
+    follow_timer->start(20);
+
+    QTimer* shield_timer = new QTimer;
+    connect(shield_timer, SIGNAL(timeout()), this, SLOT(stop()));
+    shield_timer->start(10000);
+}
+
+void Shield::follow()
+{
+    setPos(character->x(), character->y());
+}
+
+void Shield::stop()
+{
+    scene()->removeItem(this);
+    delete this;
 }

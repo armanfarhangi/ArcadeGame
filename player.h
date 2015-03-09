@@ -30,9 +30,14 @@ public slots:
     void check_keys();
 };
 
-class Shield : public QGraphicsPixmapItem {
+class Shield : public QObject, public QGraphicsPixmapItem {
+    Q_OBJECT
 public:
-    Shield();
+    Shield(Player* player);
+    Player* character;
+public slots:
+    void follow();
+    void stop();
 };
 
 #endif // PLAYER
