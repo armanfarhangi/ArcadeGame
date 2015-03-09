@@ -13,6 +13,7 @@
 #include "game.h"
 #include <QObject>
 #include <QApplication>
+#include <QList>
 
 
 EnemyBeam::EnemyBeam(int direction, Game* param_game)

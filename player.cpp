@@ -11,6 +11,8 @@
 #include <QPixmap>
 #include "enemies.h"
 #include <QTimer>
+#include "enemy_beam.h"
+#include <QList>
 
 
 Player::Player(int value)
@@ -173,9 +175,7 @@ void Player::shoot(int value)
     //beam only created if it's been 3 seconds since last shot
     if (shoot_cooldown == true){
         Beam* beam = new Beam(value);
-        if (character == 1)
-            beam->setPos(x() + 23, y() - 40);
-        else if (character == 2)
+        if (character == 1 || character == 2)
             beam->setPos(x() + 23, y() - 40);
         else
             beam->setPos(x() + 40, y() - 40);
@@ -189,11 +189,16 @@ void Player::shoot(int value)
 Shield::Shield(Player* player)
 {
     character = player;
-    setPos(character->x(), character->y());
+
+    if (character->character == 2 || character->character == 3)
+        setPos(character->x() - 46, character->y() - 25);
+    else
+        setPos(character->x() - 34, character->y() - 25);
+
     setPixmap(QPixmap(":Images/shield_sprite.png"));
     QTimer* follow_timer = new QTimer;
     connect(follow_timer, SIGNAL(timeout()), this, SLOT(follow()));
-    follow_timer->start(20);
+    follow_timer->start(1);
 
     QTimer* shield_timer = new QTimer;
     connect(shield_timer, SIGNAL(timeout()), this, SLOT(stop()));
@@ -202,7 +207,20 @@ Shield::Shield(Player* player)
 
 void Shield::follow()
 {
-    setPos(character->x(), character->y());
+    //if an e enemy beam collides with shield, then destroy the beam
+    //this list continuously stores the items that the shield collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(EnemyBeam)){ //if type of colliding_items[i] is EnemyBeam
+            scene()->removeItem(colliding_items[i]); //remove enemy beam
+            //memory management
+            delete colliding_items[i];
+        }
+
+    if (character->character == 2 || character->character == 3)
+        setPos(character->x() - 47, character->y() - 25);
+    else
+        setPos(character->x() - 34, character->y() - 25);
 }
 
 void Shield::stop()
