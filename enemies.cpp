@@ -44,8 +44,7 @@ XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
 }
 
 void XEnemy::set_coor(){
-    // +25 so that they aim at player's center instead of default left side
-    target_x = target->x() + 25;
+    target_x = target->x() + 10;
     target_y = target->y();
 }
 
@@ -76,12 +75,12 @@ void XEnemy::move_and_shoot_down()
     //as long as enemy doesn't move past the right of top platform edge, then it moves right
     if (direction == 1)
         setPos(x() + speed, y());
-        if (x() > 595)
+        if (x() > 615)
             direction = 0;
     //as long as enemy doesn't move past the left of top platform edge, then it moves left
     if (direction == 0)
         setPos(x() - speed, y());
-        if (x() < 120)
+        if (x() < 100)
             direction = 1;
 }
 
@@ -91,19 +90,19 @@ void XEnemy::move_and_shoot_up()
     if (abs(x()-target_x) <= 8){
         //2 is used to later let beam know the beam should move up
         EnemyBeam* beam = new EnemyBeam(2, game);
-        beam->setPos(x() + 10, y());
+        beam->setPos(x() + 10, y() + 20);
         scene()->addItem(beam);
     }
 
     //as long as enemy doesn't move past the right of top platform edge, then it moves right
     if (direction == 1)
         setPos(x() + speed, y());
-        if (x() > 595)
+        if (x() > 615)
             direction = 0;
     //as long as enemy doesn't move past the left of top platform edge, then it moves left
     if (direction == 0)
         setPos(x() - speed, y());
-        if (x() < 120)
+        if (x() < 100)
             direction = 1;
 }
 
@@ -141,8 +140,8 @@ YEnemy::YEnemy(Player* player, int x_coor, Game* param_game){
 }
 
 void YEnemy::set_coor(){
-    // +25 so that they aim at player's center instead of default left side
-    target_x = target->x() + 25;
+    // +20 so that they aim at player's center instead of default top left side
+    target_x = target->x();
     target_y = target->y();
 }
 
@@ -166,19 +165,19 @@ void YEnemy::move_and_shoot_right()
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
         EnemyBeam* beam = new EnemyBeam(3, game);
-        beam->setPos(x() + 10, y());
+        beam->setPos(x(), y() + 20);
         scene()->addItem(beam);
     }
 
     //if enemy moves past top edge, change direction
     if (direction == 1)
         setPos(x(), y() - speed);
-        if (y() < 60)
+        if (y() < 40)
             direction = 0;
     //if enemy moves below bottom edge, change direction
     if (direction == 0)
         setPos(x(), y() + speed);
-        if (y() > 510)
+        if (y() > 530)
             direction = 1;
 }
 
@@ -188,18 +187,18 @@ void YEnemy::move_and_shoot_left()
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
         EnemyBeam* beam = new EnemyBeam(4, game);
-        beam->setPos(x() + 10, y());
+        beam->setPos(x(), y() + 20);
         scene()->addItem(beam);
     }
 
     //if enemy moves past top edge, change direction
     if (direction == 1)
         setPos(x(), y() - speed);
-        if (y() < 60)
+        if (y() < 40)
             direction = 0;
     //if enemy moves past bottom edge, change direction
     if (direction == 0)
         setPos(x(), y() + speed);
-        if (y() > 510)
+        if (y() > 530)
             direction = 1;
 }
