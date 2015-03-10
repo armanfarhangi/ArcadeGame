@@ -176,6 +176,14 @@ void Game::show_instructions()
 void Game::new_wave_or_win()
 {
     if (wave_count == 3 && enemy_count == 0){
+        QWidget* win_window = new QWidget;
+        QHBoxLayout* hlayout = new QHBoxLayout;
+        QLabel* you_win = new QLabel("YOU WIN!!!");
+        hlayout->addWidget(you_win);
+        win_window->setLayout(hlayout);
+        win_window->show();
+        //so this function doesn't create win windows over and over again
+        enemy_count = 9000;
         return;
     }
     if (enemy_count == 0){
