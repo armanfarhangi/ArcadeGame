@@ -202,7 +202,6 @@ void Player::check_keys()
         scene()->addItem(shield);
         shield_cooldown = false;
         shield_timer->start(9000);
-
     }
     else if (up && space)
         shoot(1);
@@ -220,10 +219,27 @@ void Player::shoot(int value)
     //beam only created if it's been 3 seconds since last shot
     if (shoot_cooldown == true){
         Beam* beam = new Beam(value);
-        if (character == 1 || character == 2)
-            beam->setPos(x() + 23, y() - 40);
-        else
-            beam->setPos(x() + 40, y() - 40);
+        if (character == 1){
+            if (value == 1)
+                beam->setPos(x() + 23, y() - 50);
+            else if (value == 2)
+                beam->setPos(x() + 23, y() + 75);
+            else if (value == 3)
+                beam->setPos(x() - 40, y() + 30);
+            else if (value == 4)
+                beam->setPos(x() + 53, y() + 30);
+        }
+        else if (character == 2 || character == 3){
+            if (value == 1)
+                beam->setPos(x() + 6, y() - 58);
+            else if (value == 2)
+                beam->setPos(x() + 6, y() + 83);
+            else if (value == 3)
+                beam->setPos(x() - 60, y() + 30);
+            else if (value == 4)
+                beam->setPos(x() + 40, y() + 30);
+        }
+
         scene()->addItem(beam);
         shoot_cooldown = false;
         shoot_timer->start(2000);
