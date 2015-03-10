@@ -123,6 +123,7 @@ Game::Game(QWidget*)
 
 void Game::game_over()
 {
+    wave_count = 0;
     if (difficulty == 1)
         enemy_count = 4;
     else if (difficulty == 2)
@@ -164,16 +165,22 @@ void Game::show_instructions()
 {
     QWidget* instruction_window = new QWidget;
     QLabel* instructions1 = new QLabel("<h3>DESTROY YOUR ENEMIES BEFORE THEY DESTROY YOU!</h3>");
-    QLabel* instructions2 = new QLabel("*** USE ARROW KEYS TO MOVE AND SPACE BAR TO SHOOT ***");
+    QLabel* instructions2 = new QLabel("*** USE ARROW KEYS TO MOVE ***");
     instructions2->setAlignment(Qt::AlignCenter);
-    QLabel* instructions3 = new QLabel("*** YOU CAN ONLY SHOOT EVERY COUPLE SECONDS ***");
+    QLabel* instructions3 = new QLabel("*** USE SPACE TO SHOOT (ONLY WHILE MOVING) ***");
     instructions3->setAlignment(Qt::AlignCenter);
+    QLabel* instructions4 = new QLabel("*** USE SPACE WHILE STANDING STILL FOR SHIELD ***");
+    instructions4->setAlignment(Qt::AlignCenter);
+    QLabel* instructions5 = new QLabel("*** BLUE ORB = SHOT READY; ORANGE ORB = SHIELD READY ***");
+    instructions5->setAlignment(Qt::AlignCenter);
     QPushButton* close = new QPushButton("DONE");
 
     QVBoxLayout* vlayout = new QVBoxLayout;
     vlayout->addWidget(instructions1);
     vlayout->addWidget(instructions2);
     vlayout->addWidget(instructions3);
+    vlayout->addWidget(instructions4);
+    vlayout->addWidget(instructions5);
     vlayout->addWidget(close);
     instruction_window->setLayout(vlayout);
     instruction_window->show();
@@ -188,11 +195,31 @@ void Game::new_wave_or_win()
         player->right = false;
         player->up = false;
         player->down = false;
+
+        QLabel* winner_label = new QLabel;
+        QPixmap* face = new QPixmap(":/Images/goku_face.png");
+        if (character == 1){
+            delete face;
+            face = new QPixmap(":/Images/goku_face.png");
+        }
+        else if (character == 2){
+            delete face;
+            face = new QPixmap(":/Images/hercule_face.png");
+        }
+        else if (character == 3){
+            delete face;
+            face = new QPixmap(":/Images/saiyaman_face.png");
+        }
+        winner_label->setPixmap(*face);
+        QLabel* you_win = new QLabel("<h1>YOU WIN!!!</h1>");
+        you_win->setAlignment(Qt::AlignCenter);
+
+        QVBoxLayout* vlayout = new QVBoxLayout;
+        vlayout->addWidget(winner_label);
+        vlayout->addWidget(you_win);
+
         QWidget* win_window = new QWidget;
-        QHBoxLayout* hlayout = new QHBoxLayout;
-        QLabel* you_win = new QLabel("YOU WIN!!!");
-        hlayout->addWidget(you_win);
-        win_window->setLayout(hlayout);
+        win_window->setLayout(vlayout);
         win_window->show();
         //so this function doesn't create win windows over and over again
         enemy_count = 9000;
