@@ -61,9 +61,9 @@ void EnemyBeam::move_down(){
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
-            scene()->addItem(tombstone);
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove beam
             //memory management (don't delete Player or else glitch)
@@ -93,9 +93,9 @@ void EnemyBeam::move_up(){
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
-            scene()->addItem(tombstone);
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Player
             //memory management (don't delete Player or else glitch)
@@ -125,9 +125,9 @@ void EnemyBeam::move_right()
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
-            scene()->addItem(tombstone);
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Player
             //memory management (don't delete Player or else glitch)
@@ -157,9 +157,9 @@ void EnemyBeam::move_left()
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
-            scene()->addItem(tombstone);
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Beam
             //memory management (don't delete Player or else glitch)

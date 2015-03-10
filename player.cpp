@@ -105,16 +105,14 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 
 void Player::shoot_cooled_down()
 {
-    shoot_cooldown = true;
-    scene()->addItem(shoot_ready);
     shoot_timer->stop();
+    shoot_cooldown = true;
 }
 
 void Player::shield_cooled_down()
 {
-    shield_cooldown = true;
-    scene()->addItem(shield_ready);
     shield_timer->stop();
+    shield_cooldown = true;
 }
 
 void Player::check_keys()
@@ -210,9 +208,9 @@ void Player::check_keys()
     if (space && shield_cooldown && !up && !down && !left && !right){
         Shield* shield = new Shield(this);
         scene()->addItem(shield);
-        scene()->removeItem(shield_ready);
         shield_cooldown = false;
-        shield_timer->start(11000);
+        shield_ready->setPos(0, -100);
+        shield_timer->start(10000);
     }
     else if (up && space)
         shoot(1);
@@ -227,16 +225,22 @@ void Player::check_keys()
 void Player::indicator_follow()
 {
     if (character == 1){
-        shoot_ready->setPos(x() - 12, y() + 29);
-        shield_ready->setPos(x() + 55, y() + 26);
+        if (shoot_cooldown == true)
+            shoot_ready->setPos(x() - 12, y() + 29);
+        if (shield_cooldown == true)
+            shield_ready->setPos(x() + 55, y() + 26);
     }
     else if (character == 2){
-        shoot_ready->setPos(x() - 25, y() + 29);
-        shield_ready->setPos(x() + 37, y() + 26);
+        if (shoot_cooldown == true)
+            shoot_ready->setPos(x() - 25, y() + 29);
+        if (shield_cooldown == true)
+            shield_ready->setPos(x() + 37, y() + 26);
     }
     else if (character == 3){
-        shoot_ready->setPos(x() - 25, y() + 29);
-        shield_ready->setPos(x() + 37, y() + 26);
+        if (shoot_cooldown == true)
+            shoot_ready->setPos(x() - 25, y() + 29);
+        if (shield_cooldown == true)
+            shield_ready->setPos(x() + 37, y() + 26);
     }
 }
 
@@ -269,7 +273,7 @@ void Player::shoot(int value)
 
         scene()->addItem(beam);
         shoot_cooldown = false;
-        scene()->removeItem(shoot_ready);
+        shoot_ready->setPos(0, -200);
         shoot_timer->start(2000);
     }
 }
@@ -291,7 +295,7 @@ Shield::Shield(Player* player)
 
     QTimer* shield_usage_timer = new QTimer;
     connect(shield_usage_timer, SIGNAL(timeout()), this, SLOT(stop()));
-    shield_usage_timer->start(4000);
+    shield_usage_timer->start(4500);
 }
 
 void Shield::follow()
