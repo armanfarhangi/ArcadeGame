@@ -15,6 +15,7 @@
 #include <QGraphicsScene>
 #include <QApplication>
 #include <QDesktopWidget>
+#include "powerups.h"
 
 //creates the main window
 Game::Game(QWidget*)
@@ -359,6 +360,11 @@ void Game::start_battle()
     QTimer* check_enemynwave = new QTimer;
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
+
+    SpeedUp* speedup = new SpeedUp(this);
+    scene->addItem(speedup);
+    Burst* burst = new Burst(this);
+    scene->addItem(burst);
 
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());
