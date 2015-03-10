@@ -11,6 +11,7 @@
 #include <QObject>
 #include <QString>
 #include <QGraphicsView>
+#include "player.h"
 
 //main window at beginning to select character and difficulty
 class Game : public QWidget {
@@ -21,6 +22,7 @@ public:
     int difficulty;
     QGraphicsView* view;
     void game_over();
+    Player* player;
 public slots:
     void goku_set();
     void hercule_set();

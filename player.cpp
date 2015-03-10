@@ -212,7 +212,7 @@ void Player::check_keys()
         scene()->addItem(shield);
         scene()->removeItem(shield_ready);
         shield_cooldown = false;
-        shield_timer->start(9000);
+        shield_timer->start(11000);
     }
     else if (up && space)
         shoot(1);
@@ -289,9 +289,9 @@ Shield::Shield(Player* player)
     connect(follow_timer, SIGNAL(timeout()), this, SLOT(follow()));
     follow_timer->start(1);
 
-    QTimer* shield_timer = new QTimer;
-    connect(shield_timer, SIGNAL(timeout()), this, SLOT(stop()));
-    shield_timer->start(5000);
+    QTimer* shield_usage_timer = new QTimer;
+    connect(shield_usage_timer, SIGNAL(timeout()), this, SLOT(stop()));
+    shield_usage_timer->start(4000);
 }
 
 void Shield::follow()

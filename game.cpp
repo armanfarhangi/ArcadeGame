@@ -215,7 +215,7 @@ void Game::start_battle()
     scene->addItem(shoot_indicator);
     scene->addItem(shield_indicator);
     //create the player, a graphic item, and pass the indicators with
-    Player* player = new Player(character, shoot_indicator, shield_indicator);
+    player = new Player(character, shoot_indicator, shield_indicator);
     scene->addItem(player);
     //to set focus on player item automatically
     player->setFlag(QGraphicsItem::ItemIsFocusable);
