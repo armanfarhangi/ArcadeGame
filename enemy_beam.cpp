@@ -14,6 +14,7 @@
 #include <QObject>
 #include <QApplication>
 #include <QList>
+#include <QGraphicsPixmapItem>
 
 
 EnemyBeam::EnemyBeam(int direction, Game* param_game)

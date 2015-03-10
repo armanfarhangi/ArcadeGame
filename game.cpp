@@ -207,11 +207,16 @@ void Game::start_battle()
     view = new QGraphicsView;
     //create the scene (which is the abstract graphic space)
     QGraphicsScene* scene = new QGraphicsScene;
-    //create the player, a graphic item
-    Player* player = new Player(character);
-    scene->addItem(player);
     //set scene and its items into the view
     view->setScene(scene);
+    //shoot and shield indicators
+    QGraphicsPixmapItem* shoot_indicator = new QGraphicsPixmapItem(QPixmap (":/Images/shoot_indicator.png"));
+    QGraphicsPixmapItem* shield_indicator = new QGraphicsPixmapItem(QPixmap (":/Images/shield_indicator.png"));
+    scene->addItem(shoot_indicator);
+    scene->addItem(shield_indicator);
+    //create the player, a graphic item, and pass the indicators with
+    Player* player = new Player(character, shoot_indicator, shield_indicator);
+    scene->addItem(player);
     //to set focus on player item automatically
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();

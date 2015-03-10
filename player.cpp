@@ -15,7 +15,7 @@
 #include <QList>
 
 
-Player::Player(int value)
+Player::Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapItem* shield_indicator)
 {
     character = value;
     shoot_cooldown = true;
@@ -25,6 +25,9 @@ Player::Player(int value)
     up = false;
     down = false;
     space = false;
+
+    shoot_ready = shoot_indicator;
+    shield_ready = shield_indicator;
 
     if (character == 2){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
@@ -43,6 +46,11 @@ Player::Player(int value)
         //set player spawn position for Goku
         this->setPos(340, 270);
     }
+
+    //creates a timer that refreshes location of indicators to follow
+    QTimer* indicator_follow = new QTimer;
+    connect(indicator_follow, SIGNAL(timeout()), this, SLOT(indicator_follow()));
+    indicator_follow->start(10);
 
     //very often check which keys have been pressed
     QTimer* smooth_timer = new QTimer;
@@ -98,12 +106,14 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 void Player::shoot_cooled_down()
 {
     shoot_cooldown = true;
+    scene()->addItem(shoot_ready);
     shoot_timer->stop();
 }
 
 void Player::shield_cooled_down()
 {
     shield_cooldown = true;
+    scene()->addItem(shield_ready);
     shield_timer->stop();
 }
 
@@ -200,6 +210,7 @@ void Player::check_keys()
     if (space && shield_cooldown && !up && !down && !left && !right){
         Shield* shield = new Shield(this);
         scene()->addItem(shield);
+        scene()->removeItem(shield_ready);
         shield_cooldown = false;
         shield_timer->start(9000);
     }
@@ -211,6 +222,22 @@ void Player::check_keys()
         shoot(3);
     else if (right && space)
         shoot(4);
+}
+
+void Player::indicator_follow()
+{
+    if (character == 1){
+        shoot_ready->setPos(x() - 12, y() + 29);
+        shield_ready->setPos(x() + 55, y() + 26);
+    }
+    else if (character == 2){
+        shoot_ready->setPos(x() - 25, y() + 29);
+        shield_ready->setPos(x() + 37, y() + 26);
+    }
+    else if (character == 3){
+        shoot_ready->setPos(x() - 25, y() + 29);
+        shield_ready->setPos(x() + 37, y() + 26);
+    }
 }
 
 void Player::shoot(int value)
@@ -242,6 +269,7 @@ void Player::shoot(int value)
 
         scene()->addItem(beam);
         shoot_cooldown = false;
+        scene()->removeItem(shoot_ready);
         shoot_timer->start(2000);
     }
 }

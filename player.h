@@ -15,10 +15,12 @@ class Player : public QObject, public QGraphicsPixmapItem {
 public:
     void keyPressEvent(QKeyEvent* event);
     void keyReleaseEvent(QKeyEvent *event);
-    Player(int value);
+    Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapItem* shield_indicator);
     int character;
     QTimer* shoot_timer;
     QTimer* shield_timer;
+    QGraphicsPixmapItem* shoot_ready;
+    QGraphicsPixmapItem* shield_ready;
     bool shoot_cooldown;
     bool shield_cooldown;
     bool left;
@@ -31,6 +33,7 @@ public slots:
     void shoot_cooled_down();
     void shield_cooled_down();
     void check_keys();
+    void indicator_follow();
 };
 
 class Shield : public QObject, public QGraphicsPixmapItem {
