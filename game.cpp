@@ -269,22 +269,14 @@ void Game::new_wave_or_win()
 
 void Game::check_powerups()
 {
-    if (speed_out == 0)
-        speed_spawn->start(10);
-    if (burst_out == 0)
-        burst_spawn->start(10);
-}
-
-void Game::spawn_speed()
-{
-    SpeedUp* speedup = new SpeedUp(this);
-    scene->addItem(speedup);
-}
-
-void Game::spawn_burst()
-{
-    Burst* burst = new Burst(this);
-    scene->addItem(burst);
+    if (!speed_out){
+        SpeedUp* speedup = new SpeedUp(this);
+        scene->addItem(speedup);
+    }
+    if (!burst_out){
+        Burst* burst = new Burst(this);
+        scene->addItem(burst);
+    }
 }
 
 void Game::goku_set()
@@ -382,12 +374,7 @@ void Game::start_battle()
     check_enemynwave->start(1000);
 
     speed_out = 0;
-    speed_spawn = new QTimer;
-    connect(speed_spawn, SIGNAL(timeout()), this, SLOT(spawn_speed()));
-
     burst_out = 0;
-    burst_spawn = new QTimer;
-    connect(burst_spawn, SIGNAL(timeout()), this, SLOT(spawn_burst()));
 
     QTimer* check_powerups_timer = new QTimer;
     connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
