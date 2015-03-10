@@ -52,25 +52,22 @@ EnemyBeam::EnemyBeam(int direction, Game* param_game)
     }
 }
 
-void EnemyBeam::game_over(){
-    //can't close scene/view in EnemyBeam because it's part of the scene/view
-    //so then, allow Game object to do so
-    game->game_over();
-}
-
 void EnemyBeam::move_down(){
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
+            tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
-            scene()->removeItem(this); //remove Player
+            scene()->removeItem(this); //remove beam
             //memory management (don't delete Player or else glitch)
             delete this;
 
             //game over menu
-            game_over();
+            game->game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -91,13 +88,16 @@ void EnemyBeam::move_up(){
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
+            tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Player
             //memory management (don't delete Player or else glitch)
             delete this;
 
             //game over menu
-            game_over();
+            game->game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -118,13 +118,16 @@ void EnemyBeam::move_right()
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
+            tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Player
             //memory management (don't delete Player or else glitch)
             delete this;
 
             //game over menu
-            game_over();
+            game->game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
@@ -145,13 +148,16 @@ void EnemyBeam::move_left()
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+            QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
+            tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            scene()->addItem(tombstone);
             scene()->removeItem(colliding_items[i]); //remove Player
             scene()->removeItem(this); //remove Beam
             //memory management (don't delete Player or else glitch)
             delete this;
 
             //game over menu
-            game_over();
+            game->game_over();
 
             //important to return so that the beam that's been deleted doesn't try to move in the code below
             return;
