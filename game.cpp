@@ -111,6 +111,8 @@ Game::Game(QWidget*)
     QObject::connect(easy, SIGNAL(clicked()), this, SLOT(easy_set()));
     QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
+    difficulty = 1;
+    enemy_count = 4;
 
     //when BATTLE! is clicked, the menu window is hidden and the battle window is created and shown
     //hide menu window, don't destroy it; this way you can save character and difficulty information
@@ -171,6 +173,33 @@ void Game::show_instructions()
     QApplication::connect(close, SIGNAL(clicked()), instruction_window, SLOT(close()));
 }
 
+void Game::new_wave_or_win()
+{
+    if (wave_count == 3 && enemy_count == 0){
+        return;
+    }
+    if (enemy_count == 0){
+        if (difficulty >= 1){
+            XEnemy* top_enemy = new XEnemy(player, -10, this);
+            scene->addItem(top_enemy);
+            XEnemy* bottom_enemy = new XEnemy(player, 590, this);
+            scene->addItem(bottom_enemy);
+            enemy_count += 2;
+        }
+        if (difficulty >= 2){
+            YEnemy* left_enemy = new YEnemy(player, 60, this);
+            scene->addItem(left_enemy);
+            enemy_count += 3;
+        }
+        if (difficulty == 3){
+            YEnemy* right_enemy = new YEnemy(player, 655, this);
+            scene->addItem(right_enemy);
+            enemy_count +=4;
+        }
+        ++wave_count;
+    }
+}
+
 void Game::goku_set()
 {
     character = 1;
@@ -189,16 +218,19 @@ void Game::saiyaman_set()
 void Game::easy_set()
 {
     difficulty = 1;
+    enemy_count = 4;
 }
 
 void Game::medium_set()
 {
     difficulty = 2;
+    enemy_count = 6;
 }
 
 void Game::hard_set()
 {
     difficulty = 3;
+    enemy_count = 8;
 }
 
 //slot that starts the game after player clicks BATTLE!
@@ -206,7 +238,7 @@ void Game::start_battle()
 {
     view = new QGraphicsView;
     //create the scene (which is the abstract graphic space)
-    QGraphicsScene* scene = new QGraphicsScene;
+    scene = new QGraphicsScene;
     //set scene and its items into the view
     view->setScene(scene);
     //shoot and shield indicators
@@ -231,6 +263,8 @@ void Game::start_battle()
 
     //background
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
+
+    wave_count = 1;
 
     //spawn enemies
     XEnemy* top_enemy1 = new XEnemy(player, -10, this);
@@ -257,6 +291,10 @@ void Game::start_battle()
         scene->addItem(right_enemy1);
         scene->addItem(right_enemy2);
      }
+
+    QTimer* check_enemynwave = new QTimer;
+    connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
+    check_enemynwave->start(1000);
 
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());

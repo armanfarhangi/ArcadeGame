@@ -9,6 +9,7 @@
 #include "enemy_beam.h"
 #include <cmath>
 #include "player.h"
+#include "game.h"
 
 XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
     //in order to
