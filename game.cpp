@@ -14,6 +14,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QApplication>
+#include <QDesktopWidget>
 
 //creates the main window
 Game::Game(QWidget*)
@@ -251,5 +252,9 @@ void Game::start_battle()
         scene->addItem(right_enemy1);
         scene->addItem(right_enemy2);
      }
+
+    // center the battle screen
+    //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());
+
     view->show();
 }
