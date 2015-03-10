@@ -267,6 +267,26 @@ void Game::new_wave_or_win()
     }
 }
 
+void Game::check_powerups()
+{
+    if (speed_out == 0)
+        speed_spawn->start(10);
+    if (burst_out == 0)
+        burst_spawn->start(10);
+}
+
+void Game::spawn_speed()
+{
+    SpeedUp* speedup = new SpeedUp(this);
+    scene->addItem(speedup);
+}
+
+void Game::spawn_burst()
+{
+    Burst* burst = new Burst(this);
+    scene->addItem(burst);
+}
+
 void Game::goku_set()
 {
     character = 1;
@@ -361,10 +381,17 @@ void Game::start_battle()
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
 
-    SpeedUp* speedup = new SpeedUp(this);
-    scene->addItem(speedup);
-    Burst* burst = new Burst(this);
-    scene->addItem(burst);
+    speed_out = 0;
+    speed_spawn = new QTimer;
+    connect(speed_spawn, SIGNAL(timeout()), this, SLOT(spawn_speed()));
+
+    burst_out = 0;
+    burst_spawn = new QTimer;
+    connect(burst_spawn, SIGNAL(timeout()), this, SLOT(spawn_burst()));
+
+    QTimer* check_powerups_timer = new QTimer;
+    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
+    check_powerups_timer->start(10);
 
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());

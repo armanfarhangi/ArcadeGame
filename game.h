@@ -27,6 +27,10 @@ public:
     QGraphicsScene* scene;
     void game_over();
     Player* player;
+    bool speed_out;
+    QTimer* speed_spawn;
+    bool burst_out;
+    QTimer* burst_spawn;
 public slots:
     void goku_set();
     void hercule_set();
@@ -37,6 +41,9 @@ public slots:
     void start_battle();
     void show_instructions();
     void new_wave_or_win();
+    void check_powerups();
+    void spawn_speed();
+    void spawn_burst();
 };
 
 #endif // MAINMENU

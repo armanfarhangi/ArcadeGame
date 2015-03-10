@@ -18,6 +18,8 @@ class SpeedUp : public QObject, public QGraphicsPixmapItem {
 public:
     SpeedUp(Game* game_arg);
     Game* game;
+public slots:
+    void begone();
 };
 
 //inherited from QObject so it can connect
@@ -27,6 +29,8 @@ class Burst : public QObject, public QGraphicsPixmapItem {
 public:
     Burst(Game* game_arg);
     Game* game;
+public slots:
+    void begone();
 };
 
 #endif // POWERUPS
