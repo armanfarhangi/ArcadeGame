@@ -112,6 +112,7 @@ Game::Game(QWidget*)
     QObject::connect(medium, SIGNAL(clicked()), this, SLOT(medium_set()));
     QObject::connect(hard, SIGNAL(clicked()), this, SLOT(hard_set()));
     difficulty = 1;
+    wave_count = 0;
     enemy_count = 4;
 
     //when BATTLE! is clicked, the menu window is hidden and the battle window is created and shown
@@ -122,6 +123,13 @@ Game::Game(QWidget*)
 
 void Game::game_over()
 {
+    if (difficulty == 1)
+        enemy_count = 4;
+    else if (difficulty == 2)
+        enemy_count = 6;
+    else if (difficulty == 3)
+        enemy_count = 8;
+
     QWidget* game_over_menu = new QWidget;
 
     QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
@@ -175,7 +183,11 @@ void Game::show_instructions()
 
 void Game::new_wave_or_win()
 {
-    if (wave_count == 3 && enemy_count == 0){
+    if (wave_count == 1 && enemy_count == 0){
+        player->left = false;
+        player->right = false;
+        player->up = false;
+        player->down = false;
         QWidget* win_window = new QWidget;
         QHBoxLayout* hlayout = new QHBoxLayout;
         QLabel* you_win = new QLabel("YOU WIN!!!");
@@ -184,27 +196,46 @@ void Game::new_wave_or_win()
         win_window->show();
         //so this function doesn't create win windows over and over again
         enemy_count = 9000;
-        return;
     }
-    if (enemy_count == 0){
+    if (enemy_count == 0 && wave_count == 0){
+        ++wave_count;
+        //spawn enemies
+        XEnemy* top_enemy1 = new XEnemy(player, -10, this);
+        XEnemy* top_enemy2 = new XEnemy(player, -10, this);
+        scene->addItem(top_enemy1);
+        scene->addItem(top_enemy2);
+        XEnemy* bottom_enemy1 = new XEnemy(player, 590, this);
+        XEnemy* bottom_enemy2 = new XEnemy(player, 590, this);
+        scene->addItem(bottom_enemy1);
+        scene->addItem(bottom_enemy2);
+
         if (difficulty >= 1){
-            XEnemy* top_enemy = new XEnemy(player, -10, this);
-            scene->addItem(top_enemy);
-            XEnemy* bottom_enemy = new XEnemy(player, 590, this);
-            scene->addItem(bottom_enemy);
-            enemy_count += 2;
+            for (int i = 0; i < wave_count; ++i){
+            XEnemy* another_top_enemy = new XEnemy(player, -10, this);
+            scene->addItem(another_top_enemy);
+            XEnemy* another_bottom_enemy = new XEnemy(player, 590, this);
+            scene->addItem(another_bottom_enemy);
+            }
+            enemy_count = 6;
         }
         if (difficulty >= 2){
-            YEnemy* left_enemy = new YEnemy(player, 60, this);
-            scene->addItem(left_enemy);
-            enemy_count += 3;
+            YEnemy* left_enemy1 = new YEnemy(player, 60, this);
+            YEnemy*left_enemy2 = new YEnemy(player, 60, this);
+            scene->addItem(left_enemy1);
+            scene->addItem(left_enemy2);
+            YEnemy* another_left_enemy = new YEnemy(player, 60, this);
+            scene->addItem(another_left_enemy);
+            enemy_count = 9;
         }
         if (difficulty == 3){
-            YEnemy* right_enemy = new YEnemy(player, 655, this);
-            scene->addItem(right_enemy);
-            enemy_count +=4;
+            YEnemy* right_enemy1 = new YEnemy(player, 655, this);
+            YEnemy* right_enemy2 = new YEnemy(player, 655, this);
+            scene->addItem(right_enemy1);
+            scene->addItem(right_enemy2);
+            YEnemy* another_right_enemy = new YEnemy(player, 655, this);
+            scene->addItem(another_right_enemy);
+            enemy_count = 12;
         }
-        ++wave_count;
     }
 }
 
@@ -271,8 +302,6 @@ void Game::start_battle()
 
     //background
     scene->setBackgroundBrush(QBrush(QImage(":/Images/background.png")));
-
-    wave_count = 1;
 
     //spawn enemies
     XEnemy* top_enemy1 = new XEnemy(player, -10, this);

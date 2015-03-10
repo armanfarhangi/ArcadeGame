@@ -10,6 +10,7 @@
 #include <cmath>
 #include "player.h"
 #include "game.h"
+#include "beam.h"
 
 XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
     //in order to
@@ -65,6 +66,21 @@ void XEnemy::move_and_shoot()
 
 void XEnemy::move_and_shoot_down()
 {
+    //if enemy gets hit by beam, then destroy both enemy and beam
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Beam)){ //if type of colliding_items[i] is Enemy
+            --game->enemy_count;
+            scene()->removeItem(colliding_items[i]); //remove Beam
+            scene()->removeItem(this); //remove Enemy
+            //memory management
+            delete colliding_items[i];
+            delete this;
+            //important to return so that the beam that's been deleted doesn't use code below
+            return;
+        }
+
     //if enemy is on-line with player (give or take 8 units), then they shoot down
     if (abs(x()-target_x) <= 8){
         //1 is used to later allow beam know to move down
@@ -87,6 +103,21 @@ void XEnemy::move_and_shoot_down()
 
 void XEnemy::move_and_shoot_up()
 {
+    //if enemy gets hit by beam, then destroy both enemy and beam
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Beam)){ //if type of colliding_items[i] is Enemy
+            --game->enemy_count;
+            scene()->removeItem(colliding_items[i]); //remove Beam
+            scene()->removeItem(this); //remove Enemy
+            //memory management
+            delete colliding_items[i];
+            delete this;
+            //important to return so that the beam that's been deleted doesn't use code below
+            return;
+        }
+
     //if enemy is on-line with player (give or take 8 units), then they shoot up
     if (abs(x()-target_x) <= 8){
         //2 is used to later let beam know the beam should move up
@@ -162,6 +193,21 @@ void YEnemy::move_and_shoot()
 
 void YEnemy::move_and_shoot_right()
 {
+    //if enemy gets hit by beam, then destroy both enemy and beam
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Beam)){ //if type of colliding_items[i] is Enemy
+            --game->enemy_count;
+            scene()->removeItem(colliding_items[i]); //remove Beam
+            scene()->removeItem(this); //remove Enemy
+            //memory management
+            delete colliding_items[i];
+            delete this;
+            //important to return so that the beam that's been deleted doesn't use code below
+            return;
+        }
+
     //if enemy is on-line with player (give or take 8 units), then they shoot right
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down
@@ -184,6 +230,21 @@ void YEnemy::move_and_shoot_right()
 
 void YEnemy::move_and_shoot_left()
 {
+    //if enemy gets hit by beam, then destroy both enemy and beam
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(Beam)){ //if type of colliding_items[i] is Enemy
+            --game->enemy_count;
+            scene()->removeItem(colliding_items[i]); //remove Beam
+            scene()->removeItem(this); //remove Enemy
+            //memory management
+            delete colliding_items[i];
+            delete this;
+            //important to return so that the beam that's been deleted doesn't use code below
+            return;
+        }
+
     //if enemy is on-line with player (give or take 8 units), then they shoot left
     if (abs(y()-target_y) <= 8){
         //1 is used to later allow beam know to move down

@@ -27,21 +27,6 @@ Beam::Beam(int value){
 
 void Beam::move_and_destroy()
 {
-    //if the beam collides with an enemy, then destroy both beam and enemy
-    //this list holds all the items that the beam collides with
-    QList<QGraphicsItem*> colliding_items = collidingItems();
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(XEnemy)
-        || typeid(*(colliding_items[i])) == typeid(YEnemy)){ //if type of colliding_items[i] is Enemy
-            scene()->removeItem(colliding_items[i]); //remove Enemy
-            scene()->removeItem(this); //remove beam
-            //memory management
-            delete colliding_items[i];
-            delete this;
-            //important to return so that the beam that's been deleted doesn't try to move in the code below
-            return;
-        }
-
     if (direction == 1){
         //moves bullet up
         setPos(x(), y() - 6);
