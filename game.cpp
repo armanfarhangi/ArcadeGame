@@ -233,8 +233,7 @@ void Game::new_wave_or_win()
         winner_label->setPixmap(*face);
         QLabel* you_win = new QLabel("<h1>YOU WIN!!!</h1>");
         you_win->setAlignment(Qt::AlignCenter);
-        QPushButton* close = new QPushButton("DONE");
-        connect(close, SIGNAL(clicked()), this, SLOT(close()));
+        QPushButton* close = new QPushButton("SEE YOU LATER");
 
         QVBoxLayout* vlayout = new QVBoxLayout;
         vlayout->addWidget(winner_label);
@@ -244,6 +243,10 @@ void Game::new_wave_or_win()
         QWidget* win_window = new QWidget;
         win_window->setLayout(vlayout);
         win_window->show();
+
+        connect(close, SIGNAL(clicked()), view, SLOT(close()));
+        connect(close, SIGNAL(clicked()), win_window, SLOT(close()));
+
         //so this function doesn't create win windows over and over again
         enemy_count = 9000;
     }
