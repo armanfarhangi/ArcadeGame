@@ -22,8 +22,7 @@ public:
     bool has_died;
 public slots:
     void begone();
-    void check_player_life();
-    //void check_player_life();
+    void check_player();
 };
 
 //inherited from QObject so it can connect
@@ -36,8 +35,8 @@ public:
     bool has_died;
 public slots:
     void begone();
-    void check_player_life();
-    //void check_player_life();
+    void check_player();
+
 };
 
 #endif // POWERUPS

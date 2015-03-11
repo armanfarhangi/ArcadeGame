@@ -29,8 +29,8 @@ public:
     bool down;
     bool space;
     void shoot(int value);
-    bool speed_out;
-    bool burst_out;
+    int speed;
+    bool burst_fire;
 public slots:
     void shoot_cooled_down();
     void shield_cooled_down();

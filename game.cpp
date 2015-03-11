@@ -116,11 +116,15 @@ Game::Game(QWidget*)
     wave_count = 0;
     enemy_count = 4;
 
-    //placed timer here instead of start_battle so when replayed there aren't multiple powerups
-    speed_out = 1;
-    burst_out = 1;
+    //placed opwerup timers here instead of start_battle so there aren't multiple timers on restart
+    speed_out = 0;
+    burst_out = 0;
     check_powerups_timer = new QTimer;
     connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
+    powerup_speed_timer = new QTimer;
+    connect (powerup_speed_timer, SIGNAL(timeout()), this, SLOT(spawn_speed_powerup()));
+    powerup_burst_timer = new QTimer;
+    connect (powerup_burst_timer, SIGNAL(timeout()), this, SLOT(spawn_burst_powerup()));
 
     //when BATTLE! is clicked, the menu window is hidden and the battle window is created and shown
     //hide menu window, don't destroy it; this way you can save character and difficulty information
@@ -131,6 +135,10 @@ Game::Game(QWidget*)
 void Game::game_over()
 {
     check_powerups_timer->stop();
+    powerup_burst_timer->stop();
+    powerup_speed_timer->stop();
+    speed_out = 0;
+    burst_out = 0;
 
     wave_count = 0;
     if (difficulty == 1)
@@ -370,10 +378,8 @@ void Game::start_battle()
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
 
-    SpeedUp* speedup = new SpeedUp(this);
-    scene->addItem(speedup);
-    Burst* burst = new Burst(this);
-    scene->addItem(burst);
+    powerup_speed_timer->start(20000);
+    powerup_burst_timer->start(20000);
     check_powerups_timer->start(10);
 
     // center the battle screen
@@ -384,12 +390,24 @@ void Game::start_battle()
 
 void Game::check_powerups()
 {
-    if (speed_out == 0){
-        SpeedUp* speedup = new SpeedUp(this);
-        scene->addItem(speedup);
+    if (speed_out == 1){
+        powerup_speed_timer->stop();
     }
-    if (burst_out == 0){
-        Burst* burst = new Burst(this);
-        scene->addItem(burst);
+    if (burst_out == 1){
+        powerup_burst_timer->stop();
     }
+}
+
+void Game::spawn_speed_powerup()
+{
+    powerup_speed_timer->stop();
+    SpeedUp* speedup = new SpeedUp(this);
+    scene->addItem(speedup);
+}
+
+void Game::spawn_burst_powerup()
+{
+    powerup_burst_timer->stop();
+    Burst* burst = new Burst(this);
+    scene->addItem(burst);
 }

@@ -30,6 +30,9 @@ Player::Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapI
     shoot_ready = shoot_indicator;
     shield_ready = shield_indicator;
 
+    speed = 6;
+    burst_fire = 0;
+
     if (character == 2){
         setPixmap(QPixmap(":/Images/hercule_stand.png"));
         //spawn position for Hercule
@@ -118,46 +121,58 @@ void Player::shield_cooled_down()
 
 void Player::check_keys()
 {
+    //if the beam collides with player, then destroy both player and enemy and open window that says you've died
+    //this list holds all the items that the beam collides with
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+        if (typeid(*(colliding_items[i])) == typeid(SpeedUp)){ //if type of colliding_items[i] is Player
+            speed = 12;
+        }
+        else if (typeid(*(colliding_items[i])) == typeid(Burst)){
+            burst_fire = true;
+            shoot_cooldown = true;
+        }
+
     if (character == 1){
     //up-left movement
     if (left && up){
         if (x() > 111 && y() > 70)
-            setPos(x() - 6, y() - 6);
+            setPos(x() - speed, y() - speed);
     }
     //right-up movement
     else if (right && up){
         if (x() < 592 && y() > 70)
-            setPos(x() + 6, y() - 6);
+            setPos(x() + speed, y() - speed);
     }
     //left down movement
     else if (left && down){
         if (x() > 111 && y() < 510)
-            setPos(x() - 6, y() + 6);
+            setPos(x() - speed, y() + speed);
     }
     //right down movement
     else if (right & down){
         if (x() < 592 && y() < 510)
-            setPos(x() + 6, y() + 6);
+            setPos(x() + speed, y() + speed);
     }
     //able to move left as long as top left of Goku is right of platform edge
     else if (left){
         if (x() > 111)
-            setPos(x() - 6, y());
+            setPos(x() - speed, y());
     }
     //able to move right as long as top left of goku is left of platform edge
     else if (right){
         if (x() < 592)
-            setPos(x() + 6, y());
+            setPos(x() + speed, y());
     }
     //able to move up as long as goku is under top platform edge
     else if (up){ //-10 to go up because y axis is inverted
         if (y() > 70)
-            setPos(x(), y() - 6);
+            setPos(x(), y() - speed);
     }
     //able to move down as long as goku is above bottom platform edge
     else if (down){//same reason for down being +10
         if (y() < 510)
-            setPos(x(), y() + 6);
+            setPos(x(), y() + speed);
     }
     }
 
@@ -165,42 +180,42 @@ void Player::check_keys()
         //up-left movement
         if (left && up){
             if (x() > 120 && y() > 70)
-                setPos(x() - 6, y() - 6);
+                setPos(x() - speed, y() - speed);
         }
         //right-up movement
         else if (right && up){
             if (x() < 606 && y() > 70)
-                setPos(x() + 6, y() - 6);
+                setPos(x() + speed, y() - speed);
         }
         //left down movement
         else if (left && down){
             if (x() > 120 && y() < 520)
-                setPos(x() - 6, y() + 6);
+                setPos(x() - speed, y() + speed);
         }
         //right down movement
         else if (right & down){
             if (x() < 606 && y() < 520)
-                setPos(x() + 6, y() + 6);
+                setPos(x() + speed, y() + speed);
         }
         //able to move left as long as top left of Goku is right of platform edge
         else if (left){
             if (x() > 120)
-                setPos(x() - 6, y());
+                setPos(x() - speed, y());
         }
         //able to move right as long as top left of goku is left of platform edge
         else if (right){
             if (x() < 606)
-                setPos(x() + 6, y());
+                setPos(x() + speed, y());
         }
         //able to move up as long as goku is under top platform edge
         else if (up){ //-10 to go up because y axis is inverted
             if (y() > 70)
-                setPos(x(), y() - 6);
+                setPos(x(), y() - speed);
         }
         //able to move down as long as goku is above bottom platform edge
         else if (down){//same reason for down being +10
             if (y() < 520)
-                setPos(x(), y() + 6);
+                setPos(x(), y() + speed);
         }
     }
 
@@ -273,9 +288,11 @@ void Player::shoot(int value)
         }
 
         scene()->addItem(beam);
+        if (!burst_fire){
         shoot_cooldown = false;
         shoot_ready->setPos(0, -200);
         shoot_timer->start(2000);
+        }
     }
 }
 

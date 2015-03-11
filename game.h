@@ -30,6 +30,8 @@ public:
     bool speed_out;
     bool burst_out;
     QTimer* check_powerups_timer;
+    QTimer* powerup_speed_timer;
+    QTimer* powerup_burst_timer;
     bool player_dead;
 public slots:
     void goku_set();
@@ -42,6 +44,8 @@ public slots:
     void show_instructions();
     void new_wave_or_win();
     void check_powerups();
+    void spawn_speed_powerup();
+    void spawn_burst_powerup();
 };
 
 #endif // MAINMENU
