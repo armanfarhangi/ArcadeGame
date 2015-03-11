@@ -13,7 +13,7 @@ SpeedUp::SpeedUp(Game* game_arg)
     setPos(rand() % (570 - 130) + 130, rand() % (520 - 80) + 80);
     QTimer* duration = new QTimer;
     connect(duration, SIGNAL(timeout()), this, SLOT(begone()));
-    duration->start(10000);
+    duration->start(8000);
 }
 
 void SpeedUp::begone()
@@ -32,7 +32,7 @@ Burst::Burst(Game* game_arg)
     setPos(rand() % (570 - 130) + 130, rand() % (520 - 80) + 80);
     QTimer* duration = new QTimer;
     connect(duration, SIGNAL(timeout()), this, SLOT(begone()));
-    duration->start(10000);
+    duration->start(8000);
 }
 
 void Burst::begone()

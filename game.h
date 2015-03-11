@@ -29,6 +29,7 @@ public:
     Player* player;
     bool speed_out;
     bool burst_out;
+    QTimer* check_powerups_timer;
 public slots:
     void goku_set();
     void hercule_set();
