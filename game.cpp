@@ -116,6 +116,12 @@ Game::Game(QWidget*)
     wave_count = 0;
     enemy_count = 4;
 
+    //placed timer here instead of start_battle so when replayed there aren't multiple powerups
+    speed_out = 1;
+    burst_out = 1;
+    check_powerups_timer = new QTimer;
+    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
+
     //when BATTLE! is clicked, the menu window is hidden and the battle window is created and shown
     //hide menu window, don't destroy it; this way you can save character and difficulty information
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(hide()));
@@ -124,6 +130,7 @@ Game::Game(QWidget*)
 
 void Game::game_over()
 {
+    check_powerups_timer->stop();
     wave_count = 0;
     if (difficulty == 1)
         enemy_count = 4;
@@ -363,9 +370,6 @@ void Game::start_battle()
 
     speed_out = 0;
     burst_out = 0;
-
-    QTimer* check_powerups_timer = new QTimer;
-    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
     check_powerups_timer->start(100);
 
     // center the battle screen
@@ -376,11 +380,11 @@ void Game::start_battle()
 
 void Game::check_powerups()
 {
-    if (!speed_out){
+    if (speed_out == 0){
         SpeedUp* speedup = new SpeedUp(this);
         scene->addItem(speedup);
     }
-    if (!burst_out){
+    if (burst_out == 0){
         Burst* burst = new Burst(this);
         scene->addItem(burst);
     }
