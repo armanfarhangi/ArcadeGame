@@ -10,6 +10,7 @@
 #include <QGraphicsItem>
 #include <QObject>
 #include "game.h"
+#include <QTimer>
 
 //inherited from QObject so it can connect
 //need to put in Q_OBJECT, a macro that allows for connecting signals and slots
@@ -18,8 +19,11 @@ class SpeedUp : public QObject, public QGraphicsPixmapItem {
 public:
     SpeedUp(Game* game_arg);
     Game* game;
+    bool has_died;
 public slots:
     void begone();
+    void check_player_life();
+    //void check_player_life();
 };
 
 //inherited from QObject so it can connect
@@ -29,8 +33,11 @@ class Burst : public QObject, public QGraphicsPixmapItem {
 public:
     Burst(Game* game_arg);
     Game* game;
+    bool has_died;
 public slots:
     void begone();
+    void check_player_life();
+    //void check_player_life();
 };
 
 #endif // POWERUPS

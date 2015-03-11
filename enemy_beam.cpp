@@ -61,6 +61,7 @@ void EnemyBeam::move_down(){
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            game->player_dead = 1;
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
             scene()->addItem(tombstone);
@@ -93,6 +94,7 @@ void EnemyBeam::move_up(){
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            game->player_dead = 1;
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
             scene()->addItem(tombstone);
@@ -125,6 +127,7 @@ void EnemyBeam::move_right()
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            game->player_dead = 1;
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
             scene()->addItem(tombstone);
@@ -157,6 +160,7 @@ void EnemyBeam::move_left()
         if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
+            game->player_dead = 1;
             scene()->removeItem(game->player->shoot_ready);
             scene()->removeItem(game->player->shield_ready);
             scene()->addItem(tombstone);

@@ -131,6 +131,7 @@ Game::Game(QWidget*)
 void Game::game_over()
 {
     check_powerups_timer->stop();
+
     wave_count = 0;
     if (difficulty == 1)
         enemy_count = 4;
@@ -323,6 +324,7 @@ void Game::start_battle()
     //create the player, a graphic item, and pass the indicators with
     player = new Player(character, shoot_indicator, shield_indicator);
     scene->addItem(player);
+    player_dead = 0;
     //to set focus on player item automatically
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
@@ -368,9 +370,11 @@ void Game::start_battle()
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
 
-    speed_out = 0;
-    burst_out = 0;
-    check_powerups_timer->start(100);
+    SpeedUp* speedup = new SpeedUp(this);
+    scene->addItem(speedup);
+    Burst* burst = new Burst(this);
+    scene->addItem(burst);
+    check_powerups_timer->start(10);
 
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());
