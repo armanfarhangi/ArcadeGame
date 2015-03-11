@@ -1,16 +1,16 @@
 #include "powerups.h"
 #include "QGraphicsPixmapItem"
-#include "player.h"
+#include "game.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
 
 
-SpeedUp::SpeedUp(Player* player_arg)
+SpeedUp::SpeedUp(Game* game_arg)
 {
-    player = player_arg;
-    player->speed_out = 1;
+    game = game_arg;
+    game->speed_out = 1;
     setPixmap(QPixmap(":/Images/speed.png"));
     setPos(rand() % (570 - 130) + 130, rand() % (520 - 80) + 80);
     QTimer* duration = new QTimer;
@@ -20,16 +20,16 @@ SpeedUp::SpeedUp(Player* player_arg)
 
 void SpeedUp::begone()
 {
-    player->speed_out = 0;
+    game->speed_out = 0;
     scene()->removeItem(this);
     delete this;
 }
 
 
-Burst::Burst(Player* player_arg)
+Burst::Burst(Game* game_arg)
 {
-    player = player_arg;
-    player->burst_out = 1;
+    game = game_arg;
+    game->burst_out = 1;
     setPixmap(QPixmap(":/Images/burst.png"));
     setPos(rand() % (570 - 130) + 130, rand() % (520 - 80) + 80);
     QTimer* duration = new QTimer;
@@ -39,7 +39,7 @@ Burst::Burst(Player* player_arg)
 
 void Burst::begone()
 {
-    player->burst_out = 0;
+    game->burst_out = 0;
     scene()->removeItem(this);
     delete this;
 }

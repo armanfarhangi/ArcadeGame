@@ -39,6 +39,7 @@ public slots:
     void start_battle();
     void show_instructions();
     void new_wave_or_win();
+    void check_powerups();
 };
 
 #endif // MAINMENU

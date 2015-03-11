@@ -65,29 +65,7 @@ Player::Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapI
     //10 seconds after shooting, the player can shoot again
     shield_timer = new QTimer;
     connect(shield_timer, SIGNAL(timeout()), this, SLOT(shield_cooled_down()));
-
-    //power ups in player class so multiples aren't created when game is played again
-    speed_out = 0;
-    burst_out = 0;
-
-    QTimer* check_powerups_timer = new QTimer;
-    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
-    check_powerups_timer->start(100);
 }
-
-
-void Player::check_powerups()
-{
-    if (!speed_out){
-        SpeedUp* speedup = new SpeedUp(this);
-        scene()->addItem(speedup);
-    }
-    if (!burst_out){
-        Burst* burst = new Burst(this);
-        scene()->addItem(burst);
-    }
-}
-
 
 void Player::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){

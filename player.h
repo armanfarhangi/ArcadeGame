@@ -36,7 +36,6 @@ public slots:
     void shield_cooled_down();
     void check_keys();
     void indicator_follow();
-    void check_powerups();
 };
 
 class Shield : public QObject, public QGraphicsPixmapItem {

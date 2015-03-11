@@ -361,8 +361,27 @@ void Game::start_battle()
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
 
+    speed_out = 0;
+    burst_out = 0;
+
+    QTimer* check_powerups_timer = new QTimer;
+    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
+    check_powerups_timer->start(100);
+
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());
 
     view->show();
+}
+
+void Game::check_powerups()
+{
+    if (!speed_out){
+        SpeedUp* speedup = new SpeedUp(this);
+        scene->addItem(speedup);
+    }
+    if (!burst_out){
+        Burst* burst = new Burst(this);
+        scene->addItem(burst);
+    }
 }
