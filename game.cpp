@@ -181,7 +181,7 @@ void Game::game_over()
 void Game::show_instructions()
 {
     QWidget* instruction_window = new QWidget;
-    QLabel* instructions1 = new QLabel("<h3>DESTROY YOUR ENEMIES BEFORE THEY DESTROY YOU!</h3>");
+    QLabel* instructions1 = new QLabel("<h3>DESTROY TWO WAVES OF ENEMIES BEFORE THEY DESTROY YOU!</h3>");
     QLabel* instructions2 = new QLabel("*** USE ARROW KEYS TO MOVE ***");
     instructions2->setAlignment(Qt::AlignCenter);
     QLabel* instructions3 = new QLabel("*** USE SPACE TO SHOOT (ONLY WHILE MOVING) ***");
@@ -190,6 +190,8 @@ void Game::show_instructions()
     instructions4->setAlignment(Qt::AlignCenter);
     QLabel* instructions5 = new QLabel("*** BLUE ORB = SHOT READY; ORANGE ORB = SHIELD READY ***");
     instructions5->setAlignment(Qt::AlignCenter);
+    QLabel* instructions6 = new QLabel("*** RARELY, POWERUPS SPAWN ON MAP: FIGURE OUT WHAT THEY DO!!! ***");
+    instructions6->setAlignment(Qt::AlignCenter);
     QPushButton* close = new QPushButton("DONE");
 
     QVBoxLayout* vlayout = new QVBoxLayout;
@@ -198,6 +200,7 @@ void Game::show_instructions()
     vlayout->addWidget(instructions3);
     vlayout->addWidget(instructions4);
     vlayout->addWidget(instructions5);
+    vlayout->addWidget(instructions6);
     vlayout->addWidget(close);
     instruction_window->setLayout(vlayout);
     instruction_window->show();
