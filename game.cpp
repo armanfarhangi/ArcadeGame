@@ -132,9 +132,6 @@ void Game::game_over()
     else if (difficulty == 3)
         enemy_count = 8;
 
-    check_powerups_timer->stop();
-    delete check_powerups_timer;
-
     QWidget* game_over_menu = new QWidget;
 
     QLabel* you_lose = new QLabel("<h1> YOU LOSE! </h1>");
@@ -270,18 +267,6 @@ void Game::new_wave_or_win()
     }
 }
 
-void Game::check_powerups()
-{
-    if (!speed_out){
-        SpeedUp* speedup = new SpeedUp(this);
-        scene->addItem(speedup);
-    }
-    if (!burst_out){
-        Burst* burst = new Burst(this);
-        scene->addItem(burst);
-    }
-}
-
 void Game::goku_set()
 {
     character = 1;
@@ -375,13 +360,6 @@ void Game::start_battle()
     QTimer* check_enemynwave = new QTimer;
     connect(check_enemynwave, SIGNAL(timeout()), this, SLOT(new_wave_or_win()));
     check_enemynwave->start(1000);
-
-    speed_out = 0;
-    burst_out = 0;
-
-    check_powerups_timer = new QTimer;
-    connect(check_powerups_timer, SIGNAL(timeout()), this, SLOT(check_powerups()));
-    check_powerups_timer->start(100);
 
     // center the battle screen
     //view->move(QApplication::desktop()->screen()->rect().center() - view->rect().center());

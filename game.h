@@ -29,7 +29,6 @@ public:
     Player* player;
     bool speed_out;
     bool burst_out;
-    QTimer* check_powerups_timer;
 public slots:
     void goku_set();
     void hercule_set();
@@ -40,7 +39,6 @@ public slots:
     void start_battle();
     void show_instructions();
     void new_wave_or_win();
-    void check_powerups();
 };
 
 #endif // MAINMENU
