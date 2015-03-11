@@ -58,7 +58,7 @@ void EnemyBeam::move_down(){
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+        if (typeid(*(colliding_items[i])) == typeid(Player) && game->enemy_count != 9000){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
             game->player_dead = 1;
@@ -91,7 +91,7 @@ void EnemyBeam::move_up(){
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+        if (typeid(*(colliding_items[i])) == typeid(Player) && game->enemy_count != 9000){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
             game->player_dead = 1;
@@ -124,7 +124,7 @@ void EnemyBeam::move_right()
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+        if (typeid(*(colliding_items[i])) == typeid(Player) && game->enemy_count != 9000){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
             game->player_dead = 1;
@@ -157,7 +157,7 @@ void EnemyBeam::move_left()
     //this list holds all the items that the beam collides with
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
-        if (typeid(*(colliding_items[i])) == typeid(Player)){ //if type of colliding_items[i] is Player
+        if (typeid(*(colliding_items[i])) == typeid(Player) && game->enemy_count != 9000){ //if type of colliding_items[i] is Player
             QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/Images/tombstone.png"));
             tombstone->setPos(colliding_items[i]->x(), colliding_items[i]->y());
             game->player_dead = 1;
