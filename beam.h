@@ -10,15 +10,16 @@
 #include <QGraphicsItem>
 #include <QObject>
 
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
+/**
+ * @brief Player beam that spawns when player hits space bar
+ */
 class Beam : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Beam(int value);
     int direction;
 public slots:
-    void move_and_destroy();
+    void move();
 };
 
 #endif // BEAM

@@ -14,7 +14,9 @@
 #include <QGraphicsScene>
 #include "player.h"
 
-//main window at beginning to select character and difficulty
+/**
+ * @brief Contains main menu, battle screen, lose menu, and win screen functionality
+ */
 class Game : public QWidget {
     Q_OBJECT
 public:

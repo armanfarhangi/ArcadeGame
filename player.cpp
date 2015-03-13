@@ -15,7 +15,12 @@
 #include <QList>
 #include "powerups.h"
 
-
+/**
+ * @brief creates player with indicators for shot and shield cooldown
+ * @param value: represents character select
+ * @param shoot_indicator: access to its members
+ * @param shield_indicator: access to its members
+ */
 Player::Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapItem* shield_indicator)
 {
     character = value;
@@ -70,6 +75,10 @@ Player::Player(int value, QGraphicsPixmapItem* shoot_indicator, QGraphicsPixmapI
     connect(shield_timer, SIGNAL(timeout()), this, SLOT(shield_cooled_down()));
 }
 
+/**
+ * @brief sets certain conditions depending on what keys are pressed
+ * @param event: key that was pressed
+ */
 void Player::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){
         left = true;
@@ -88,6 +97,10 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 }
 
+/**
+ * @brief sets certain conditions depending on what keys are released
+ * @param event: key that is released
+ */
 void Player::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
@@ -107,18 +120,28 @@ void Player::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+/**
+ * @brief allows player to shoot
+ */
 void Player::shoot_cooled_down()
 {
     shoot_timer->stop();
     shoot_cooldown = true;
 }
 
+/**
+ * @brief allows player to use shield
+ */
 void Player::shield_cooled_down()
 {
     shield_timer->stop();
     shield_cooldown = true;
 }
 
+/**
+ * @brief checks conditions set by key events in order to move, shoot, and shield
+ * also checks for collisions with powerups
+ */
 void Player::check_keys()
 {
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
@@ -238,6 +261,9 @@ void Player::check_keys()
         shoot(4);
 }
 
+/**
+ * @brief allows for shoot/shield indicators to appropriately follow player
+ */
 void Player::indicator_follow()
 {
     if (character == 1){
@@ -260,6 +286,10 @@ void Player::indicator_follow()
     }
 }
 
+/**
+ * @brief creates a beam given a certain direction
+ * @param value: represents direction
+ */
 void Player::shoot(int value)
 {
     //create beam and center it on player (coordinates depend on character selection)
@@ -296,7 +326,10 @@ void Player::shoot(int value)
     }
 }
 
-
+/**
+ * @brief creates a shield around player
+ * @param player: used to access members
+ */
 Shield::Shield(Player* player)
 {
     character = player;
@@ -316,6 +349,9 @@ Shield::Shield(Player* player)
     shield_usage_timer->start(4500);
 }
 
+/**
+ * @brief follows player and tracks collisions with enemy beams
+ */
 void Shield::follow()
 {
     //if an e enemy beam collides with shield, then destroy the beam
@@ -334,6 +370,9 @@ void Shield::follow()
         setPos(character->x() - 34, character->y() - 25);
 }
 
+/**
+ * @brief rids shield from scene
+ */
 void Shield::stop()
 {
     scene()->removeItem(this);

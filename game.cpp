@@ -17,7 +17,9 @@
 #include <QDesktopWidget>
 #include "powerups.h"
 
-//creates the main window
+/**
+ * @brief creates the game (main_menu, battle screen, lose menu, and win screen)
+ */
 Game::Game(QWidget*)
 {
     //Title of game
@@ -132,6 +134,9 @@ Game::Game(QWidget*)
     QApplication::connect(battle, SIGNAL(clicked()), this, SLOT(start_battle()));
 }
 
+/**
+ * @brief resets game parameters and produces a menu for restart, change options, or quit
+ */
 void Game::game_over()
 {
     check_powerups_timer->stop();
@@ -178,6 +183,9 @@ void Game::game_over()
     connect(quit, SIGNAL(clicked()), this, SLOT(close()));
 }
 
+/**
+ * @brief shows list of game-relevant information
+ */
 void Game::show_instructions()
 {
     QWidget* instruction_window = new QWidget;
@@ -208,6 +216,9 @@ void Game::show_instructions()
     QApplication::connect(close, SIGNAL(clicked()), instruction_window, SLOT(close()));
 }
 
+/**
+ * @brief checks enemy count and wave count to spawn enemies and win screen appropriately (connected to timer)
+ */
 void Game::new_wave_or_win()
 {
     if (wave_count == 1 && enemy_count == 0){
@@ -292,40 +303,60 @@ void Game::new_wave_or_win()
     }
 }
 
+/**
+ * @brief character select to goku
+ */
 void Game::goku_set()
 {
     character = 1;
 }
 
+/**
+ * @brief character select to hercule
+ */
 void Game::hercule_set()
 {
     character = 2;
 }
 
+/**
+ * @brief character select to saiyaman
+ */
 void Game::saiyaman_set()
 {
     character = 3;
 }
 
+/**
+ * @brief difficulty select to easy
+ */
 void Game::easy_set()
 {
     difficulty = 1;
     enemy_count = 4;
 }
 
+/**
+ * @brief difficulty select to medium
+ */
 void Game::medium_set()
 {
     difficulty = 2;
     enemy_count = 6;
 }
 
+/**
+ * @brief difficulty select to hard
+ */
 void Game::hard_set()
 {
     difficulty = 3;
     enemy_count = 8;
 }
 
-//slot that starts the game after player clicks BATTLE!
+/**
+ * @brief creates the battle screen
+ */
 void Game::start_battle()
 {
     view = new QGraphicsView;
@@ -407,6 +438,9 @@ void Game::check_powerups()
     }
 }
 
+/**
+ * @brief spawns a speed power up
+ */
 void Game::spawn_speed_powerup()
 {
     powerup_speed_timer->stop();
@@ -414,6 +448,9 @@ void Game::spawn_speed_powerup()
     scene->addItem(speedup);
 }
 
+/**
+ * @brief spawns a burstfire power up
+ */
 void Game::spawn_burst_powerup()
 {
     powerup_burst_timer->stop();

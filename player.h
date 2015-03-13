@@ -10,6 +10,10 @@
 #include <QObject>
 #include <QTimer>
 
+
+/**
+ * @brief Player that is being controlled
+ */
 class Player : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
@@ -38,6 +42,9 @@ public slots:
     void indicator_follow();
 };
 
+/**
+ * @brief Shield that protects player when space key is pressed by itself
+ */
 class Shield : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:

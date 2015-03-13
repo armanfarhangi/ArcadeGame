@@ -12,6 +12,12 @@
 #include "game.h"
 #include "beam.h"
 
+/**
+ * @brief creates an x-coordinate moving enemy that can access player and game members
+ * @param player: used to access player coordinates to target
+ * @param y_coor: sets y-coordinate to spawn at (either top grassy area or bottom)
+ * @param param_game: used to let game know when enemy dies (for win screen)
+ */
 XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
     //in order to
     target = player;
@@ -45,11 +51,17 @@ XEnemy::XEnemy(Player* player, int y_coor, Game* param_game){
     moving_timer->start(40);
 }
 
+/**
+ * @brief sets player coordinates (set to timer)
+ */
 void XEnemy::set_coor(){
     target_x = target->x() + 10;
     target_y = target->y();
 }
 
+/**
+ * @brief chance of changing direction (set to timer)
+ */
 void XEnemy::randomize()
 {
     //50% chance; if it was 0, changes to 1; if it was 1, changes to 0
@@ -57,6 +69,9 @@ void XEnemy::randomize()
         direction = (direction + 1) % 2;
 }
 
+/**
+ * @brief decides whether to moveand shoot down or up depending on y-coordinate
+ */
 void XEnemy::move_and_shoot()
 {
     //depending on the edge enemy is on, they will shoot in a certain direction
@@ -64,6 +79,9 @@ void XEnemy::move_and_shoot()
     else move_and_shoot_up();
 }
 
+/**
+ * @brief moves left and right and creates a down beam when x-coordinate matches with player
+ */
 void XEnemy::move_and_shoot_down()
 {
     //if enemy gets hit by beam, then destroy both enemy and beam
@@ -101,6 +119,9 @@ void XEnemy::move_and_shoot_down()
             direction = 1;
 }
 
+/**
+ * @brief moves left and right and creates an up beam when x-coordinate matches with player
+ */
 void XEnemy::move_and_shoot_up()
 {
     //if enemy gets hit by beam, then destroy both enemy and beam
@@ -138,6 +159,12 @@ void XEnemy::move_and_shoot_up()
             direction = 1;
 }
 
+/**
+ * @brief creates a y-coordinate moving enemy that can access player and game members
+ * @param player: used to access player coordinates to target
+ * @param x_coor: sets x-coordinate to spawn at (either left grassy area or right)
+ * @param param_game: used to let game know when enemy dies (for win screen)
+ */
 YEnemy::YEnemy(Player* player, int x_coor, Game* param_game){
     //in order to
     target = player;
@@ -171,12 +198,18 @@ YEnemy::YEnemy(Player* player, int x_coor, Game* param_game){
     moving_timer->start(40);
 }
 
+/**
+ * @brief sets player coordinates (set to timer)
+ */
 void YEnemy::set_coor(){
     // +20 so that they aim at player's center instead of default top left side
     target_x = target->x();
     target_y = target->y();
 }
 
+/**
+ * @brief chance of changing direction (set to timer)
+ */
 void YEnemy::randomize()
 {
     //50% chance; if it was 0, changes to 1; if it was 1, changes to 0
@@ -184,6 +217,9 @@ void YEnemy::randomize()
         direction = (direction + 1) % 2;
 }
 
+/**
+ * @brief decides whether to moveand shoot down or up depending on y-coordinate
+ */
 void YEnemy::move_and_shoot()
 {
     //depending on the edge enemy is on, they will shoot in a certain direction
@@ -191,6 +227,9 @@ void YEnemy::move_and_shoot()
     else move_and_shoot_left();
 }
 
+/**
+ * @brief moves up and down and creates a right beam when y-coordinate matches with player
+ */
 void YEnemy::move_and_shoot_right()
 {
     //if enemy gets hit by beam, then destroy both enemy and beam
@@ -228,6 +267,9 @@ void YEnemy::move_and_shoot_right()
             direction = 1;
 }
 
+/**
+ * @brief moves up and down and creates a left beam when y-coordinate matches with player
+ */
 void YEnemy::move_and_shoot_left()
 {
     //if enemy gets hit by beam, then destroy both enemy and beam

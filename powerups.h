@@ -12,8 +12,9 @@
 #include "game.h"
 #include <QTimer>
 
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
+/**
+ * @brief Powerup that raises speed of player
+ */
 class SpeedUp : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
@@ -25,8 +26,9 @@ public slots:
     void check_player();
 };
 
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
+/**
+ * @brief Powerup that eliminates cooldown of player shot
+ */
 class Burst : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:

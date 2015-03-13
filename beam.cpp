@@ -9,6 +9,10 @@
 #include <QList>
 #include "enemies.h"
 
+/**
+ * @brief creates player beam in certain direction
+ * @param value: represents direction (1 up, 2 down, 3 left, 4 right)
+ */
 Beam::Beam(int value){
     //creates a beam//sets direction: 1 up 2 down 3 left 4 right
     direction = value;
@@ -20,12 +24,14 @@ Beam::Beam(int value){
 
     //connects a timer with the move function to create a moving beam
     QTimer* timer = new QTimer;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move_and_destroy()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(40);
 }
 
-
-void Beam::move_and_destroy()
+/**
+ * @brief moves beam in certain direction
+ */
+void Beam::move()
 {
     if (direction == 1){
         //moves bullet up

@@ -11,8 +11,9 @@
 #include "player.h"
 #include "game.h"
 
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
+/**
+ * @brief Enemy that only changes x-coordinates (top and bottom)
+ */
 class XEnemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
@@ -32,6 +33,9 @@ private:
     Game* game;
 };
 
+/**
+ * @brief Enemy that only changes on y-coordinates (left and right)
+ */
 class YEnemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:

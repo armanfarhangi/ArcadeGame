@@ -16,7 +16,11 @@
 #include <QList>
 #include <QGraphicsPixmapItem>
 
-
+/**
+ * @brief creates enemy beam in a certain direction
+ * @param direction: 1 up, 2 down, 3 left, 4 right
+ * @param param_game: used to access enemy count and player (a member of game)
+ */
 EnemyBeam::EnemyBeam(int direction, Game* param_game)
 {
     game = param_game;
@@ -53,6 +57,9 @@ EnemyBeam::EnemyBeam(int direction, Game* param_game)
     }
 }
 
+/**
+ * @brief moves enemy beam down and can destroy player on touch
+ */
 void EnemyBeam::move_down(){
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
     //this list holds all the items that the beam collides with
@@ -86,6 +93,9 @@ void EnemyBeam::move_down(){
     }
 }
 
+/**
+ * @brief moves enemy beam up and can destroy player on touch
+ */
 void EnemyBeam::move_up(){
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
     //this list holds all the items that the beam collides with
@@ -118,6 +128,9 @@ void EnemyBeam::move_up(){
     }
 }
 
+/**
+ * @brief moves enemy beam right and can destroy player on touch
+ */
 void EnemyBeam::move_right()
 {
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died
@@ -151,6 +164,9 @@ void EnemyBeam::move_right()
     }
 }
 
+/**
+ * @brief moves enemy beam left and can destroy player on touch
+ */
 void EnemyBeam::move_left()
 {
     //if the beam collides with player, then destroy both player and enemy and open window that says you've died

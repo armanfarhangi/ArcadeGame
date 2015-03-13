@@ -11,8 +11,9 @@
 #include <QObject>
 #include "game.h"
 
-//inherited from QObject so it can connect
-//need to put in Q_OBJECT, a macro that allows for connecting signals and slots
+/**
+ * @brief Enemy beam that spawns when enemy aligns with player
+ */
 class EnemyBeam : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
